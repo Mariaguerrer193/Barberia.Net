@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Elementos de la solución/">
+    <File Path="DockerFile.API" />
+  </Folder>
   <Project Path="API.Consumer/API.Consumer.csproj" Id="58c5418e-2036-4d21-9675-098f0916a04b" />
   <Project Path="Barberia.API/Barberia.API.csproj" />
   <Project Path="Barberia.Modelos/Barberia.Modelos.csproj" />

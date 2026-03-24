@@ -17,7 +17,25 @@ builder.Services.AddControllers()
     );
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerGen(options =>
+{
+    // Esto le enseña a Swagger cómo mostrar DateOnly (YYYY-MM-DD)
+    options.MapType<DateOnly>(() => new Microsoft.OpenApi.Models.OpenApiSchema
+    {
+        Type = "string",
+        Format = "date",
+        Example = new Microsoft.OpenApi.Any.OpenApiString("2026-03-24")
+    });
+
+    // Esto le enseña a Swagger cómo mostrar TimeOnly (HH:mm:ss)
+    options.MapType<TimeOnly>(() => new Microsoft.OpenApi.Models.OpenApiSchema
+    {
+        Type = "string",
+        Format = "time",
+        Example = new Microsoft.OpenApi.Any.OpenApiString("14:30:00")
+    });
+});
 
 var app = builder.Build();
 

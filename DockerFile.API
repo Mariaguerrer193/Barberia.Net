@@ -14,7 +14,7 @@ RUN dotnet restore "Barberia.API/Barberia.API.csproj"
 COPY . .
 
 WORKDIR "/src/Barberia.API"
-RUN dotnet build "API_Libreria.csproj" -c Release -o /app/build
+RUN dotnet build "Barberia.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
 RUN dotnet publish "Barberia.API.csproj" -c Release -o /app/publish /p:UseAppHost=false

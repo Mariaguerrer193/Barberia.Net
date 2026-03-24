@@ -4,11 +4,11 @@ using Barberia.Modelos;
 using Barberia.Servicios;
 using Barberia.Servicios.Interfaces;
 
-Crud<Barbero>.EndPoint = "https://localhost:7238/api/Barberos";
-Crud<Cliente>.EndPoint = "https://localhost:7238/api/Clientes";
-Crud<Servicio>.EndPoint = "https://localhost:7238/api/Servicios";
-Crud<Horario>.EndPoint = "https://localhost:7238/api/Horarios";
-Crud<Cita>.EndPoint = "https://localhost:7238/api/Citas";
+Crud<Barbero>.EndPoint = "https://barberia-net.onrender.com/api/Barberos";
+Crud<Cliente>.EndPoint = "https://barberia-net.onrender.com/api/Clientes";
+Crud<Servicio>.EndPoint = "https://barberia-net.onrender.com/api/Servicios";
+Crud<Horario>.EndPoint = "https://barberia-net.onrender.com/api/Horarios";
+Crud<Cita>.EndPoint = "https://barberia-net.onrender.com/api/Citas";
 
 
 var builder = WebApplication.CreateBuilder(args);

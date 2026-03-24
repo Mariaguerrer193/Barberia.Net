@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="API.Consumer/API.Consumer.csproj" Id="58c5418e-2036-4d21-9675-098f0916a04b" />
+  <Project Path="Barberia.API/Barberia.API.csproj" />
+  <Project Path="Barberia.Modelos/Barberia.Modelos.csproj" />
+  <Project Path="Barberia.MVC/Barberia.MVC.csproj" Id="c04422ad-c7c5-469f-8eec-4bc2bc55a90f" />
+  <Project Path="Barberia.Servicios/Barberia.Servicios.csproj" Id="e15bb086-0e47-44f2-916d-9715c3093ef0" />
+</Solution>

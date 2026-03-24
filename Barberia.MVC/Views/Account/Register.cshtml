@@ -1,0 +1,75 @@
+﻿@using Barberia.Modelos
+@{
+    ViewData["Title"] = "Registro de Cliente - Barbería";
+}
+
+<div class="elec-page container mt-4 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            <div class="elec-card shadow-lg">
+                <div class="elec-card-header text-center py-3 border-0">
+                    <h3 class="mb-0 text-white fw-bold">
+                        <i class="bi bi-person-plus-fill me-2"></i>Registro de Cliente
+                    </h3>
+                </div>
+
+                <div class="elec-card-body p-4 p-md-5">
+                    <form asp-action="Register" asp-controller="Account" method="post">
+
+                        <div class="row">
+                            <div class="col-md-6 border-end border-secondary pe-md-4">
+                                <h5 class="elec-title mb-3 fs-5"><i class="bi bi-person-lines-fill me-2"></i>Datos Personales</h5>
+
+                                <div class="mb-3">
+                                    <label class="form-label text-white-50 small fw-bold">Nombres</label>
+                                    <input type="text" class="form-control elec-form-control rounded-3" name="Nombre_Cli" required placeholder="Ej: Juan Alberto">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label text-white-50 small fw-bold">Apellidos</label>
+                                    <input type="text" class="form-control elec-form-control rounded-3" name="Apellido_Cli" required placeholder="Ej: Pérez Castro">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label text-white-50 small fw-bold">Teléfono</label>
+                                    <input type="text" class="form-control elec-form-control rounded-3" name="Telefono_Cli" required placeholder="Ej: 0987654321">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 ps-md-4 mt-4 mt-md-0">
+                                <h5 class="elec-title mb-3 fs-5"><i class="bi bi-shield-lock-fill me-2"></i>Cuenta y Seguridad</h5>
+
+                                <div class="mb-3">
+                                    <label class="form-label text-white-50 small fw-bold">Correo Electrónico</label>
+                                    <input type="email" class="form-control elec-form-control rounded-3" name="Correo_Cli" required placeholder="usuario@ejemplo.com">
+                                    <small class="text-white-50 opacity-75">Este será su correo de acceso.</small>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label text-white-50 small fw-bold">Contraseña</label>
+                                    <input type="password" class="form-control elec-form-control rounded-3" name="contraseña_Cli" required placeholder="Mínimo 8 caracteres">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn elec-btn elec-btn-primary btn-lg rounded-3 fw-bold shadow-sm">
+                                <i class="bi bi-person-check-fill me-2"></i>Registrarse ahora
+                            </button>
+                            <a asp-action="Index" asp-controller="Account" class="btn elec-btn elec-btn-secondary rounded-3">
+                                Volver al Login
+                            </a>
+                        </div>
+
+                        @if (ViewBag.ErrorMessage != null)
+                        {
+                            <div class="alert elec-alert elec-alert-danger mt-3 text-center border-0 shadow-sm">
+                                <i class="bi bi-exclamation-octagon-fill me-2"></i>@ViewBag.ErrorMessage
+                            </div>
+                        }
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

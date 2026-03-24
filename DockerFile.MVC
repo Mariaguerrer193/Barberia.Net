@@ -1,0 +1,28 @@
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+WORKDIR /app
+EXPOSE 8080
+ENV ASPNETCORE_URLS=http://+:8080
+
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+COPY ["Barberia.MVC/Barberia.MVC.csproj", "Barberia.MVC/"]
+COPY ["API.Consumer/API.Consumer.csproj", "API.Consumer/"]
+COPY ["Barberia.Modelos/Barberia.Modelos.csproj", "Barberia.Modelos/"]
+COPY ["Barberia.Servicios/Barberia.Servicios.csproj", "Barberia.Servicios/"]
+
+RUN dotnet restore "Barberia.MVC/Barberia.MVC.csproj"
+
+COPY . .
+
+WORKDIR "/src/Barberia.MVC"
+
+RUN dotnet build "Barberia.MVC.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "Barberia.MVC.csproj" -c Release -o /app/publish /p:UseAppHost=false /p:ErrorOnDuplicatePublishOutputFiles=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "Barberia.MVC.dll"]

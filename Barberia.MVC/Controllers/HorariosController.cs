@@ -15,9 +15,9 @@ namespace Barberia.MVC.Controllers
         }
 
         // GET: Horarios/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int Id)
         {
-            var horario = Crud<Horario>.GetById(id);
+            var horario = Crud<Horario>.GetById(Id);
             if (horario == null) return NotFound();
 
             return View(horario);
@@ -47,9 +47,9 @@ namespace Barberia.MVC.Controllers
         }
 
         // GET: Horarios/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int Id)
         {
-            var horario = Crud<Horario>.GetById(id);
+            var horario = Crud<Horario>.GetById(Id);
             if (horario == null) return NotFound();
 
             return View(horario);
@@ -58,11 +58,11 @@ namespace Barberia.MVC.Controllers
         // POST: Horarios/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Horario horario)
+        public ActionResult Edit(int Id, Horario horario)
         {
             try
             {
-                Crud<Horario>.Update(id, horario);
+                Crud<Horario>.Update(Id, horario);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
@@ -73,9 +73,9 @@ namespace Barberia.MVC.Controllers
         }
 
         // GET: Horarios/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int Id)
         {
-            var horario = Crud<Horario>.GetById(id);
+            var horario = Crud<Horario>.GetById(Id);
             if (horario == null) return NotFound();
 
             return View(horario);
@@ -84,11 +84,11 @@ namespace Barberia.MVC.Controllers
         // POST: Horarios/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, Horario horario)
+        public ActionResult Delete(int Id, Horario horario)
         {
             try
             {
-                Crud<Horario>.Delete(id);
+                Crud<Horario>.Delete(Id);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

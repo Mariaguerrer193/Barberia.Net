@@ -1,82 +1,102 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using API_Consumer;
+using Barberia.Modelos;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Barberia.MVC.Controllers
 {
     public class ClientesController : Controller
     {
-        // GET: ClientesController
+        // GET: Clientes
         public ActionResult Index()
         {
-            return View();
+            
+            var clientes = Crud<Cliente>.GetAll();
+            return View(clientes);
         }
 
-        // GET: ClientesController/Details/5
-        public ActionResult Details(int id)
+        // GET: Clientes/Details/5
+        public ActionResult Details(int Id)
         {
-            return View();
+            var cliente = Crud<Cliente>.GetById(Id);
+            if (cliente == null) return NotFound();
+
+            return View(cliente);
         }
 
-        // GET: ClientesController/Create
+        // GET: Clientes/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: ClientesController/Create
+        // POST: Clientes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Cliente cliente)
         {
             try
             {
+                
+                Crud<Cliente>.Create(cliente);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", ex.Message);
+                return View(cliente);
             }
         }
 
-        // GET: ClientesController/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Clientes/Edit/5
+        public ActionResult Edit(int Id)
         {
-            return View();
+            var cliente = Crud<Cliente>.GetById(Id);
+            if (cliente == null) return NotFound();
+
+            return View(cliente);
         }
 
-        // POST: ClientesController/Edit/5
+        // POST: Clientes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int Id, Cliente cliente)
         {
             try
             {
+                Crud<Cliente>.Update(Id, cliente);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", ex.Message);
+                return View(cliente);
             }
         }
 
-        // GET: ClientesController/Delete/5
-        public ActionResult Delete(int id)
+        // GET: Clientes/Delete/5
+        public ActionResult Delete(int Id)
         {
-            return View();
+            var cliente = Crud<Cliente>.GetById(Id);
+            if (cliente == null) return NotFound();
+
+            return View(cliente);
         }
 
-        // POST: ClientesController/Delete/5
+        // POST: Clientes/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int Id, Cliente cliente)
         {
             try
             {
+                Crud<Cliente>.Delete(Id);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", ex.Message);
+                return View(cliente);
             }
         }
     }

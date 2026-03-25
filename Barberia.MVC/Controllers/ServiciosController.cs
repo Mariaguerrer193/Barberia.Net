@@ -1,82 +1,101 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using API_Consumer;
+using Barberia.Modelos;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Barberia.MVC.Controllers
 {
     public class ServiciosController : Controller
     {
-        // GET: ServiciosController
+        // GET: Servicios
         public ActionResult Index()
         {
-            return View();
+            // Pide al API todos los servicios (Corte, Barba, etc.)
+            var servicios = Crud<Servicio>.GetAll();
+            return View(servicios);
         }
 
-        // GET: ServiciosController/Details/5
-        public ActionResult Details(int id)
+        // GET: Servicios/Details/5
+        public ActionResult Details(int Id)
         {
-            return View();
+            var servicio = Crud<Servicio>.GetById(Id);
+            if (servicio == null) return NotFound();
+
+            return View(servicio);
         }
 
-        // GET: ServiciosController/Create
+        // GET: Servicios/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: ServiciosController/Create
+        // POST: Servicios/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Servicio servicio)
         {
             try
             {
+                Crud<Servicio>.Create(servicio);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", ex.Message);
+                return View(servicio);
             }
         }
 
-        // GET: ServiciosController/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Servicios/Edit/5
+        public ActionResult Edit(int Id)
         {
-            return View();
+            var servicio = Crud<Servicio>.GetById(Id);
+            if (servicio == null) return NotFound();
+
+            return View(servicio);
         }
 
-        // POST: ServiciosController/Edit/5
+        // POST: Servicios/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int Id, Servicio servicio)
         {
             try
             {
+                Crud<Servicio>.Update(Id, servicio);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", ex.Message);
+                return View(servicio);
             }
         }
 
-        // GET: ServiciosController/Delete/5
-        public ActionResult Delete(int id)
+        // GET: Servicios/Delete/5
+        public ActionResult Delete(int Id)
         {
-            return View();
+            var servicio = Crud<Servicio>.GetById(Id);
+            if (servicio == null) return NotFound();
+
+            return View(servicio);
         }
 
-        // POST: ServiciosController/Delete/5
+        // POST: Servicios/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int Id, Servicio servicio)
         {
             try
             {
+                Crud<Servicio>.Delete(Id);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", ex.Message);
+                return View(servicio);
             }
         }
     }

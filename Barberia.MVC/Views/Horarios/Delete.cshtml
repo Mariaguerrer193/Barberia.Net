@@ -1,0 +1,48 @@
+﻿@model Barberia.Modelos.Horario
+
+@{
+    ViewData["Title"] = "Eliminar Horario";
+}
+
+<h1>Eliminar</h1>
+
+<h3>¿Estás seguro de que quieres eliminar este horario?</h3>
+<div>
+    <h4>Detalles del Horario</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2 fw-bold">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt class="col-sm-2 fw-bold">
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt class="col-sm-2 fw-bold">
+            @Html.DisplayNameFor(model => model.HoraInicio)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HoraInicio)
+        </dd>
+
+        <dt class="col-sm-2 fw-bold">
+            @Html.DisplayNameFor(model => model.HoraFin)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HoraFin)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Confirmar Eliminación" class="btn btn-danger" /> |
+        <a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
+    </form>
+</div>

@@ -1,0 +1,49 @@
+﻿@model Barberia.Modelos.Horario
+
+@{
+    ViewData["Title"] = "Crear Horario";
+}
+
+<h1>Crear</h1>
+
+<h4>Nuevo Horario de Atención</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Fecha" class="control-label fw-bold"></label>
+                <input asp-for="Fecha" class="form-control" type="date" required />
+                <span asp-validation-for="Fecha" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="HoraInicio" class="control-label fw-bold"></label>
+                <input asp-for="HoraInicio" class="form-control" type="time" required />
+                <span asp-validation-for="HoraInicio" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="HoraFin" class="control-label fw-bold"></label>
+                <input asp-for="HoraFin" class="form-control" type="time" required />
+                <span asp-validation-for="HoraFin" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-4">
+                <input type="submit" value="Guardar Horario" class="btn btn-primary w-100" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Index" class="btn btn-secondary btn-sm">Volver al listado</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

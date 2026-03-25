@@ -25,14 +25,24 @@ namespace Barberia.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Cita>>> GetCita()
         {
-            return await _context.Cita.ToListAsync();
+            return await _context.Cita
+                .Include(c => c.Cliente)
+                .Include(c => c.Barbero)
+                .Include(c => c.Servicio)
+                .Include(c => c.Horario)
+                .ToListAsync();
         }
 
         // GET: api/Citas/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Cita>> GetCita(int id)
         {
-            var cita = await _context.Cita.FindAsync(id);
+            var cita = await _context.Cita
+                .Include(c => c.Cliente)
+                .Include(c => c.Barbero)
+                .Include(c => c.Servicio)
+                .Include(c => c.Horario)
+                .FirstOrDefaultAsync(c => c.Id == id);
 
             if (cita == null)
             {

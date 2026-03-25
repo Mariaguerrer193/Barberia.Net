@@ -1,82 +1,100 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using API_Consumer; 
+using Barberia.Modelos;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Barberia.MVC.Controllers
 {
     public class HorariosController : Controller
     {
-        // GET: HorariosController
+        // GET: Horarios
         public ActionResult Index()
         {
-            return View();
+            var horarios = Crud<Horario>.GetAll();
+            return View(horarios);
         }
 
-        // GET: HorariosController/Details/5
+        // GET: Horarios/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var horario = Crud<Horario>.GetById(id);
+            if (horario == null) return NotFound();
+
+            return View(horario);
         }
 
-        // GET: HorariosController/Create
+        // GET: Horarios/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: HorariosController/Create
+        // POST: Horarios/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Horario horario)
         {
             try
             {
+                Crud<Horario>.Create(horario);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", ex.Message);
+                return View(horario);
             }
         }
 
-        // GET: HorariosController/Edit/5
+        // GET: Horarios/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var horario = Crud<Horario>.GetById(id);
+            if (horario == null) return NotFound();
+
+            return View(horario);
         }
 
-        // POST: HorariosController/Edit/5
+        // POST: Horarios/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Horario horario)
         {
             try
             {
+                Crud<Horario>.Update(id, horario);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", ex.Message);
+                return View(horario);
             }
         }
 
-        // GET: HorariosController/Delete/5
+        // GET: Horarios/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var horario = Crud<Horario>.GetById(id);
+            if (horario == null) return NotFound();
+
+            return View(horario);
         }
 
-        // POST: HorariosController/Delete/5
+        // POST: Horarios/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Horario horario)
         {
             try
             {
+                Crud<Horario>.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", ex.Message);
+                return View(horario);
             }
         }
     }

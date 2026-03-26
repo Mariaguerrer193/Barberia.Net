@@ -3,52 +3,54 @@ using Barberia.Modelos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Barberia.MVC.Controllers
 {
     public class CitasController : Controller
     {
-        // Métodos auxiliares para llenar los DropDownLists
-        private List<SelectListItem> GetClientes()
+        // --- MÉTODOS AUXILIARES PARA LLENAR DROPDOWNS ---
+        private void CargarListasEnViewBag()
         {
-            return Crud<Cliente>.GetAll().Select(c => new SelectListItem
+            ViewBag.ClientesList = Crud<Cliente>.GetAll().Select(c => new SelectListItem
             {
                 Value = c.Id.ToString(),
                 Text = $"{c.Nombre_Cli} {c.Apellido_Cli}"
             }).ToList();
-        }
 
-        private List<SelectListItem> GetBarberos()
-        {
-            return Crud<Barbero>.GetAll().Select(b => new SelectListItem
+            ViewBag.BarberosList = Crud<Barbero>.GetAll().Select(b => new SelectListItem
             {
                 Value = b.Id.ToString(),
                 Text = $"{b.Nombre_Bar} {b.Apellido_Bar}"
             }).ToList();
-        }
 
-        private List<SelectListItem> GetServicios()
-        {
-            return Crud<Servicio>.GetAll().Select(s => new SelectListItem
+            ViewBag.ServiciosList = Crud<Servicio>.GetAll().Select(s => new SelectListItem
             {
                 Value = s.Id.ToString(),
                 Text = $"{s.Nombre_Serv} (${s.Precio_Serv})"
             }).ToList();
-        }
 
-        private List<SelectListItem> GetHorarios()
-        {
-            return Crud<Horario>.GetAll().Select(h => new SelectListItem
+            ViewBag.HorariosList = Crud<Horario>.GetAll().Select(h => new SelectListItem
             {
                 Value = h.Id.ToString(),
                 Text = $"{h.Fecha:dd/MM/yyyy} - {h.HoraInicio}"
             }).ToList();
         }
 
+        // --- ACCIONES DEL CONTROLADOR ---
+
         // GET: Citas
         public ActionResult Index()
         {
             var citas = Crud<Cita>.GetAll();
+
+            // Enviamos los objetos completos para que la vista pueda buscar nombres por ID
+            ViewBag.Clientes = Crud<Cliente>.GetAll();
+            ViewBag.Barberos = Crud<Barbero>.GetAll();
+            ViewBag.Servicios = Crud<Servicio>.GetAll();
+            ViewBag.Horarios = Crud<Horario>.GetAll();
+
             return View(citas);
         }
 
@@ -57,16 +59,20 @@ namespace Barberia.MVC.Controllers
         {
             var cita = Crud<Cita>.GetById(Id);
             if (cita == null) return NotFound();
+
+            // Enviamos los datos para mostrar nombres en lugar de IDs en los detalles
+            ViewBag.Cliente = Crud<Cliente>.GetById(cita.ClienteId);
+            ViewBag.Barbero = Crud<Barbero>.GetById(cita.BarberoId);
+            ViewBag.Servicio = Crud<Servicio>.GetById(cita.ServicioId);
+            ViewBag.Horario = Crud<Horario>.GetById(cita.HorarioId);
+
             return View(cita);
         }
 
         // GET: Citas/Create
         public ActionResult Create()
         {
-            ViewBag.Clientes = GetClientes();
-            ViewBag.Barberos = GetBarberos();
-            ViewBag.Servicios = GetServicios();
-            ViewBag.Horarios = GetHorarios();
+            CargarListasEnViewBag();
             return View();
         }
 
@@ -83,11 +89,7 @@ namespace Barberia.MVC.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                
-                ViewBag.Clientes = GetClientes();
-                ViewBag.Barberos = GetBarberos();
-                ViewBag.Servicios = GetServicios();
-                ViewBag.Horarios = GetHorarios();
+                CargarListasEnViewBag();
                 return View(cita);
             }
         }
@@ -98,10 +100,7 @@ namespace Barberia.MVC.Controllers
             var cita = Crud<Cita>.GetById(Id);
             if (cita == null) return NotFound();
 
-            ViewBag.Clientes = GetClientes();
-            ViewBag.Barberos = GetBarberos();
-            ViewBag.Servicios = GetServicios();
-            ViewBag.Horarios = GetHorarios();
+            CargarListasEnViewBag();
             return View(cita);
         }
 
@@ -118,6 +117,7 @@ namespace Barberia.MVC.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
+                CargarListasEnViewBag();
                 return View(cita);
             }
         }
@@ -127,6 +127,11 @@ namespace Barberia.MVC.Controllers
         {
             var cita = Crud<Cita>.GetById(Id);
             if (cita == null) return NotFound();
+
+            // Para que en la confirmación de borrado se vea a quién estamos borrando
+            ViewBag.Cliente = Crud<Cliente>.GetById(cita.ClienteId);
+            ViewBag.Barbero = Crud<Barbero>.GetById(cita.BarberoId);
+
             return View(cita);
         }
 

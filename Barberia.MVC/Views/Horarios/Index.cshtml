@@ -4,51 +4,190 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="full-bg-barber">
+    <div class="container py-5">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fecha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HoraInicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HoraFin)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Fecha)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HoraInicio)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HoraFin)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
-            </tr>
+        <div class="d-flex justify-content-between align-items-end mb-5">
+            <div>
+                <h1 class="text-white fw-bold mb-0 tracking-wider">HORARIOS</h1>
+                <div class="underline-barber"></div>
+            </div>
+            <a asp-action="Create" class="btn-nuevo">
+                <i class="bi bi-plus-circle me-2"></i>CREATE NEW
+            </a>
+        </div>
+
+        <div class="table-container shadow-lg">
+            <table class="table table-dark mb-0">
+                <thead>
+                    <tr class="header-gradient-row">
+                        <th class="text-bright-white">@Html.DisplayNameFor(model => model.Id)</th>
+                        <th class="text-bright-white">@Html.DisplayNameFor(model => model.Fecha)</th>
+                        <th class="text-bright-white">@Html.DisplayNameFor(model => model.HoraInicio)</th>
+                        <th class="text-bright-white">@Html.DisplayNameFor(model => model.HoraFin)</th>
+                        <th class="text-bright-white text-end">ADMINISTRAR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                            <td>
+                                <span class="text-white fw-bold">
+                                    @Html.DisplayFor(modelItem => item.Fecha)
+                                </span>
+                            </td>
+                            <td>
+                                <span class="text-silver">
+                                    <i class="bi bi-clock me-1"></i> @Html.DisplayFor(modelItem => item.HoraInicio)
+                                </span>
+                            </td>
+                            <td>
+                                <span class="text-silver">
+                                    <i class="bi bi-clock-fill me-1"></i> @Html.DisplayFor(modelItem => item.HoraFin)
+                                </span>
+                            </td>
+                            <td class="links-acciones text-end">
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    /* 1. FONDO TOTAL (Azul a Rojo oscuro) */
+    .full-bg-barber {
+        background: linear-gradient(135deg, #001a33 0%, #000000 50%, #330000 100%);
+        position: fixed;
+        top: 56px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1000;
+        overflow-y: auto;
+    }
+
+    .underline-barber {
+        height: 4px;
+        width: 120px;
+        background: linear-gradient(90deg, #dc3545 0%, #0056b3 100%);
+        margin-top: 8px;
+        border-radius: 2px;
+    }
+
+    /* 2. TABLA CON BORDE PLATEADO */
+    .table-container {
+        border: 2px solid #c0c0c0;
+        border-radius: 10px;
+        overflow: hidden;
+        background: rgba(0, 0, 0, 0.8);
+    }
+
+    .table {
+        color: white;
+        margin-bottom: 0;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    /* 3. LÍNEA DE ENCABEZADO CONTINUA (DEGRADADA) */
+    .header-gradient-row {
+        position: relative;
+    }
+
+        .header-gradient-row th {
+            border-bottom: none !important;
+            padding-bottom: 15px !important;
         }
-    </tbody>
-</table>
+
+        .header-gradient-row::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #0056b3 0%, #dc3545 100%);
+        }
+
+    /* 4. COLORES DE TEXTO */
+    .text-bright-white {
+        color: #ffffff !important;
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 2px;
+    }
+
+    .text-silver {
+        color: #c0c0c0 !important;
+    }
+
+    .tracking-wider {
+        letter-spacing: 3px;
+    }
+
+    /* Limpieza de Bootstrap */
+    .table > :not(caption) > * > * {
+        box-shadow: none !important;
+        background-color: transparent !important;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* 5. BOTÓN NUEVO */
+    .btn-nuevo {
+        color: white;
+        text-decoration: none;
+        background: linear-gradient(90deg, #0056b3 0%, #dc3545 100%);
+        padding: 10px 25px;
+        border: 1px solid #c0c0c0;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+        .btn-nuevo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 86, 179, 0.4);
+        }
+
+    /* 6. LINKS ACCIONES CON COLORES PERSONALIZADOS */
+    .links-acciones {
+        color: #666;
+    }
+
+        .links-acciones a {
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            margin: 0 3px;
+        }
+
+            /* Color Azul para Edit */
+            .links-acciones a[href*="Edit"] {
+                color: #00aaff;
+            }
+
+            /* Color Blanco para Details */
+            .links-acciones a[href*="Details"] {
+                color: #ffffff;
+            }
+
+            /* Color Rojo para Delete */
+            .links-acciones a[href*="Delete"] {
+                color: #ff4444;
+            }
+
+            .links-acciones a:hover {
+                text-decoration: underline;
+                filter: brightness(1.3);
+            }
+</style>

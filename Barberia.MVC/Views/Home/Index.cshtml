@@ -1,8 +1,60 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Inicio - Navaja de Plata";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="p-0 mb-4 bg-dark rounded-3 shadow-lg position-relative overflow-hidden border-bottom border-danger"
+     style="background: radial-gradient(circle at center, rgba(0,0,0,0.5), rgba(0,0,0,0.9)),
+            url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover; background-position: center; min-height: 650px; border-top: 5px solid #0056b3;">
+
+    <div class="container d-flex flex-column justify-content-center align-items-center text-center" style="min-height: 650px;">
+
+        <div class="py-5 px-5" style="border-left: 5px solid #dc3545; border-right: 5px solid #0056b3; border-radius: 10px;">
+
+            <p class="fs-2 text-white-50 mb-0 text-uppercase fw-light" style="letter-spacing: 5px;">
+                Barbería
+            </p>
+
+            <h1 class="display-1 fw-bold mb-2" style="color: #c0c0c0; text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+                NAVAJA DE PLATA
+            </h1>
+
+            <p class="fs-4 text-light mb-4 fw-normal font-italic">
+                "El arte del filo, la excelencia en tu estilo."
+            </p>
+
+            <p class="small text-white-50 mb-5 mx-auto" style="max-width: 500px;">
+                La perfección no es un acto, es un hábito. Asegura tu lugar en nuestra silla y experimenta un nivel de detalle inigualable.
+            </p>
+
+            <div class="d-flex justify-content-center">
+                <a asp-controller="Citas" asp-action="Create" class="btn-barber-azul">
+                    INICIAR SESIÓN
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
+
+<style>
+    /* 5. ESTILOS PERSONALIZADOS: Aquí definimos los colores exactos */
+    body {
+        background-color: #000 !important; /* Fondo negro para TODA la página */
+    }
+
+    .btn-barber-azul {
+        /* De izquierda (Azul) a derecha (Rojo) */
+        background: linear-gradient(90deg, #0056b3 0%, #dc3545 100%);
+        /* El resto se queda igual */
+        color: white;
+        padding: 15px 35px;
+        border: 2px solid #c0c0c0;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        letter-spacing: 1px;
+        display: inline-block;
+    }
+
+    /* Nota: No agregamos el :hover para que el botón sea estático */
+</style>

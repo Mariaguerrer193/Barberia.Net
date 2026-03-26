@@ -3,67 +3,80 @@
     ViewData["Title"] = "Registro de Cliente - Barbería";
 }
 
-<div class="elec-page container mt-4 mb-5">
-    <div class="row justify-content-center">
+<div class="full-bg-barber">
+    <div class="container h-100 d-flex align-items-center justify-content-center">
+
         <div class="col-md-10 col-lg-8">
-            <div class="elec-card shadow-lg">
-                <div class="elec-card-header text-center py-3 border-0">
-                    <h3 class="mb-0 text-white fw-bold">
-                        <i class="bi bi-person-plus-fill me-2"></i>Registro de Cliente
-                    </h3>
+            <div class="registration-card shadow-lg">
+
+                <div class="text-center pt-4 pb-2">
+                    <i class="bi bi-person-plus-fill text-silver" style="font-size: 3rem;"></i>
+                    <h2 class="text-uppercase fw-bold text-white tracking-wider mt-2">Crear Cuenta</h2>
+                    <div class="underline-barber mx-auto mb-3"></div>
                 </div>
 
-                <div class="elec-card-body p-4 p-md-5">
+                <div class="p-4 p-md-5 pt-md-2">
                     <form asp-action="Register" asp-controller="Account" method="post">
-
                         <div class="row">
-                            <div class="col-md-6 border-end border-secondary pe-md-4">
-                                <h5 class="elec-title mb-3 fs-5"><i class="bi bi-person-lines-fill me-2"></i>Datos Personales</h5>
+
+                            <div class="col-md-6 border-end border-dark pe-md-4">
+                                <h5 class="text-silver mb-4 small fw-bold text-uppercase tracking-wider">
+                                    <i class="bi bi-person-lines-fill me-2"></i>Datos Personales
+                                </h5>
 
                                 <div class="mb-3">
-                                    <label class="form-label text-white-50 small fw-bold">Nombres</label>
-                                    <input type="text" class="form-control elec-form-control rounded-3" name="Nombre_Cli" required placeholder="Ej: Juan Alberto">
+                                    <label class="form-label text-white-50 small fw-bold">NOMBRES</label>
+                                    <input type="text" class="barber-input" name="Nombre_Cli" required placeholder="Ej: Juan Alberto">
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label text-white-50 small fw-bold">Apellidos</label>
-                                    <input type="text" class="form-control elec-form-control rounded-3" name="Apellido_Cli" required placeholder="Ej: Pérez Castro">
+                                    <label class="form-label text-white-50 small fw-bold">APELLIDOS</label>
+                                    <input type="text" class="barber-input" name="Apellido_Cli" required placeholder="Ej: Pérez Castro">
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label text-white-50 small fw-bold">Teléfono</label>
-                                    <input type="text" class="form-control elec-form-control rounded-3" name="Telefono_Cli" required placeholder="Ej: 0987654321">
+                                    <label class="form-label text-white-50 small fw-bold">TELÉFONO</label>
+                                    <input type="text" class="barber-input" name="Telefono_Cli" required placeholder="Ej: 0987654321">
                                 </div>
                             </div>
 
                             <div class="col-md-6 ps-md-4 mt-4 mt-md-0">
-                                <h5 class="elec-title mb-3 fs-5"><i class="bi bi-shield-lock-fill me-2"></i>Cuenta y Seguridad</h5>
+                                <h5 class="text-silver mb-4 small fw-bold text-uppercase tracking-wider">
+                                    <i class="bi bi-shield-lock-fill me-2"></i>Cuenta
+                                </h5>
 
                                 <div class="mb-3">
-                                    <label class="form-label text-white-50 small fw-bold">Correo Electrónico</label>
-                                    <input type="email" class="form-control elec-form-control rounded-3" name="Correo_Cli" required placeholder="usuario@ejemplo.com">
-                                    <small class="text-white-50 opacity-75">Este será su correo de acceso.</small>
+                                    <label class="form-label text-white-50 small fw-bold">CORREO ELECTRÓNICO</label>
+                                    <input type="email" class="barber-input" name="Correo_Cli" required placeholder="usuario@ejemplo.com">
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label text-white-50 small fw-bold">Contraseña</label>
-                                    <input type="password" class="form-control elec-form-control rounded-3" name="contraseña_Cli" required placeholder="Mínimo 8 caracteres">
+                                    <label class="form-label text-white-50 small fw-bold">CONTRASEÑA</label>
+                                    <input type="password" class="barber-input" name="contraseña_Cli" required placeholder="Mínimo 8 caracteres">
+                                </div>
+
+                                <div class="alert bg-dark border-secondary mt-4 py-2">
+                                    <p class="text-white-50 small mb-0"><i class="bi bi-info-circle me-2"></i>Su información está protegida por el sistema.</p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="d-grid gap-2 mt-4">
-                            <button type="submit" class="btn elec-btn elec-btn-primary btn-lg rounded-3 fw-bold shadow-sm">
-                                <i class="bi bi-person-check-fill me-2"></i>Registrarse ahora
+                        <div class="text-center mt-5">
+                            <button type="submit" class="btn-register-link text-uppercase fw-bold mb-3">
+                                Finalizar Registro
                             </button>
-                            <a asp-action="Index" asp-controller="Account" class="btn elec-btn elec-btn-secondary rounded-3">
-                                Volver al Login
-                            </a>
+                            <div class="underline-barber mx-auto"></div>
+
+                            <div class="mt-4">
+                                <a asp-action="Index" asp-controller="Account" class="text-silver-link small text-decoration-none">
+                                    <i class="bi bi-arrow-left me-1"></i>Volver al Inicio de Sesión
+                                </a>
+                            </div>
                         </div>
 
                         @if (ViewBag.ErrorMessage != null)
                         {
-                            <div class="alert elec-alert elec-alert-danger mt-3 text-center border-0 shadow-sm">
+                            <div class="alert bg-transparent text-danger border-danger text-center py-2 small mt-3">
                                 <i class="bi bi-exclamation-octagon-fill me-2"></i>@ViewBag.ErrorMessage
                             </div>
                         }
@@ -71,5 +84,95 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>
+
+<style>
+    /* 1. FONDO TOTAL (RESPETA LA NAVBAR) */
+    .full-bg-barber {
+        background: linear-gradient(135deg, #000000 0%, #001a33 100%);
+        position: fixed;
+        top: 56px; /* Altura de tu barra */
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1000;
+        overflow-y: auto;
+        padding: 40px 0;
+    }
+
+    /* 2. TARJETA DE REGISTRO CON BORDE DE POSTE */
+    .registration-card {
+        background-color: #1a1a1a;
+        border-radius: 10px;
+        border: 4px solid;
+        border-image: linear-gradient(0deg, #dc3545 0%, #dc3545 20%, #ffffff 20%, #ffffff 40%, #0056b3 40%, #0056b3 60%, #ffffff 60%, #ffffff 80%, #dc3545 80%, #dc3545 100% );
+        border-image-slice: 1;
+    }
+
+    /* 3. INPUTS ESTILO BARBERÍA */
+    .barber-input {
+        width: 100%;
+        background-color: #000;
+        border: 1px solid #444;
+        color: white !important;
+        border-radius: 4px;
+        padding: 10px;
+        transition: 0.3s;
+    }
+
+        .barber-input:focus {
+            border-color: #c0c0c0;
+            outline: none;
+            box-shadow: 0 0 10px rgba(192, 192, 192, 0.1);
+        }
+
+    /* 4. BOTÓN Y ELEMENTOS VISUALES */
+    .btn-register-link {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        letter-spacing: 3px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        .btn-register-link:hover {
+            color: #00c3ff;
+            transform: scale(1.05);
+        }
+
+    .underline-barber {
+        height: 3px;
+        width: 180px;
+        background: linear-gradient(90deg, #dc3545 0%, #0056b3 100%);
+    }
+
+    .text-silver {
+        color: #c0c0c0;
+    }
+
+    .text-silver-link {
+        color: #888;
+        transition: 0.3s;
+    }
+
+        .text-silver-link:hover {
+            color: #fff;
+        }
+
+    .tracking-wider {
+        letter-spacing: 2px;
+    }
+
+    /* Separador decorativo en móviles */
+    @@media (max-width: 768px) {
+        .border-end {
+            border: none !important;
+            border-bottom: 1px solid #333 !important;
+            padding-bottom: 20px;
+        }
+    }
+</style>

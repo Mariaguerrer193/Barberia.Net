@@ -1,55 +1,133 @@
 ﻿@{
-    ViewData["Title"] = "Iniciar Sesión";
+    ViewData["Title"] = "Iniciar Sesión - Navaja de Plata";
 }
-<br />
-<br />
-<br />
-<div class="row justify-content-center align-items-center elec-page" style="min-height: 80vh;">
-    <div class="col-md-5 col-lg-4">
-        <div class="elec-card shadow-lg">
-            <div class="elec-card-header text-center pt-4 pb-2 border-0 bg-transparent">
-                <i class="bi bi-shield-lock-fill text-primary" style="font-size: 3rem;"></i>
-                <h2 class="elec-title mt-3 mb-1">Sistema de Barberia</h2>
-                <p class="text-white-50 small">Ingrese sus credenciales para continuar</p>
+
+<div class="full-bg-barber">
+
+    <div class="container h-100 d-flex align-items-center">
+        <div class="row w-100 gx-5 align-items-center">
+
+            <div class="col-md-6 d-none d-md-block">
+                <div class="image-box shadow-lg">
+                    <img src="https://images.pexels.com/photos/15168271/pexels-photo-15168271.jpeg"
+                         class="img-fluid rounded-4" alt="Barbería">
+                </div>
             </div>
 
-            <div class="elec-card-body p-4">
-                <form asp-action="Login" asp-controller="Account" method="post">
-                    <div class="mb-4">
-                        <label class="form-label text-white small fw-bold">
-                            <i class="bi bi-envelope me-1"></i>Correo Electrónico
-                        </label>
-                        <input type="email" class="form-control elec-form-control rounded-3"
-                               name="email" required placeholder="nombre@correo.com">
+            <div class="col-md-6 col-12">
+                <div class="login-card-elite">
+                    <div class="text-center pt-4">
+                        <i class="bi bi-person-circle text-silver" style="font-size: 3rem;"></i>
+                        <h2 class="text-white fw-bold mt-2 tracking-wider">SISTEMA DE BARBERÍA</h2>
+                        <p class="text-white-50 small">Ingrese sus credenciales</p>
                     </div>
 
-                    <div class="mb-4">
-                        <label class="form-label text-white small fw-bold">
-                            <i class="bi bi-key me-1"></i>Contraseña
-                        </label>
-                        <input type="password" class="form-control elec-form-control rounded-3"
-                               name="password" required placeholder="********">
-                    </div>
-
-                    <button type="submit" class="btn elec-btn elec-btn-primary w-100 py-2 fw-bold rounded-3 mb-3">
-                        <i class="bi bi-box-arrow-in-right me-2"></i>Ingresar al Sistema
-                    </button>
-
-                    @if (ViewBag.ErrorMessage != null)
-                    {
-                        <div class="alert elec-alert elec-alert-danger text-center py-2 border-0 small mb-0">
-                            <i class="bi bi-exclamation-triangle-fill me-2"></i>@ViewBag.ErrorMessage
+                    <form asp-action="Login" asp-controller="Account" method="post" class="p-4">
+                        <div class="mb-3 text-start">
+                            <label class="text-silver small fw-bold text-uppercase mb-1">Correo Electrónico</label>
+                            <input type="email" name="email" class="barber-input" placeholder="usuario@barberia.com" required>
                         </div>
-                    }
-                </form>
+                        <div class="mb-4 text-start">
+                            <label class="text-silver small fw-bold text-uppercase mb-1">Contraseña</label>
+                            <input type="password" name="password" class="barber-input" placeholder="********" required>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn-entrar">ENTRAR AL SISTEMA</button>
+                            <div class="underline-barber mx-auto"></div>
+                        </div>
+                    </form>
+
+                    <div class="text-center pb-4">
+                        <a asp-action="Register" class="text-silver-link small text-decoration-none">¿No tienes cuenta? Regístrate aquí</a>
+                    </div>
+                </div>
             </div>
 
-            <div class="card-footer text-center border-top border-secondary bg-transparent py-3">
-                <p class="text-white-50 small mb-1">¿Aún no tienes cuenta?</p>
-                <a asp-action="Register" asp-controller="Account" class="text-info fw-bold text-decoration-none small">
-                    <i class="bi bi-person-plus me-1"></i>Regístrate aquí
-                </a>
-            </div>
         </div>
     </div>
 </div>
+
+<style>
+    /* ELIMINAR CUALQUIER MARGEN DEL CUERPO */
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    /* FONDO TOTAL DE LADO A LADO */
+    .full-bg-barber {
+        background: linear-gradient(135deg, #000000 0%, #001a33 100%);
+        position: fixed; /* Se pega a la pantalla */
+        top: 56px; /* Empieza justo debajo de la barra */
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1000;
+        display: flex;
+        overflow-y: auto; /* Por si la pantalla es pequeña, deja bajar */
+    }
+
+    /* Cuadro de Login con borde de poste */
+    .login-card-elite {
+        background: #1a1a1a;
+        border-radius: 10px;
+        border: 4px solid;
+        border-image: linear-gradient(0deg, #dc3545 0%, #dc3545 20%, #ffffff 20%, #ffffff 40%, #0056b3 40%, #0056b3 60%, #ffffff 60%, #ffffff 80%, #dc3545 80%, #dc3545 100% );
+        border-image-slice: 1;
+    }
+
+    /* Inputs negros */
+    .barber-input {
+        width: 100%;
+        background: #000;
+        border: 1px solid #444;
+        color: white;
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+        .barber-input:focus {
+            outline: none;
+            border-color: #c0c0c0;
+        }
+
+    /* Estilos de texto y botones */
+    .btn-entrar {
+        background: none;
+        border: none;
+        color: white;
+        font-weight: bold;
+        letter-spacing: 2px;
+    }
+
+    .underline-barber {
+        height: 3px;
+        width: 100px;
+        background: linear-gradient(90deg, #dc3545 0%, #0056b3 100%);
+        margin-top: 5px;
+    }
+
+    .text-silver {
+        color: #c0c0c0;
+    }
+
+    .text-silver-link {
+        color: #888;
+        transition: 0.3s;
+    }
+
+        .text-silver-link:hover {
+            color: #fff;
+        }
+
+    .tracking-wider {
+        letter-spacing: 2px;
+    }
+
+    .image-box img {
+        border: 2px solid #333;
+        box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    }
+</style>

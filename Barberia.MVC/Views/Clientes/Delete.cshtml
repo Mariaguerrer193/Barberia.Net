@@ -1,56 +1,148 @@
-﻿@model Barberia.Modelos.Cliente
+﻿@model Barberia.Modelos.Cita
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Eliminar Cita";
+    // Recuperamos los nombres reales de los ViewBag que ya tienes en el controller
+    var cliente = ViewBag.Cliente as Barberia.Modelos.Cliente;
+    var barbero = ViewBag.Barbero as Barberia.Modelos.Barbero;
 }
 
-<h1>Delete</h1>
+<div class="full-bg-centered d-flex align-items-center justify-content-center">
+    <div class="col-md-10 col-lg-7">
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Cliente</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre_Cli)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre_Cli)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Apellido_Cli)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Apellido_Cli)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefono_Cli)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Telefono_Cli)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Correo_Cli)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Correo_Cli)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.contraseña_Cli)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.contraseña_Cli)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+        <div class="gradient-border-delete">
+            <div class="delete-card shadow-lg p-4 p-md-5">
+
+                <div class="text-center mb-4">
+                    <i class="bi bi-exclamation-octagon-fill text-danger fs-1"></i>
+                    <h2 class="text-white fw-bold tracking-wider mt-2">¿ELIMINAR ESTA CITA?</h2>
+                    <p class="text-danger small fw-bold">ESTA ACCIÓN NO SE PUEDE DESHACER</p>
+                    <div class="underline-red mx-auto"></div>
+                </div>
+
+                <div class="delete-body mb-5">
+                    <div class="info-item mb-3">
+                        <label class="label-red-muted">ID DE REGISTRO</label>
+                        <div class="text-white">@Model.Id</div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label class="label-red-muted">CLIENTE</label>
+                            <div class="text-white fs-5">
+                                @(cliente != null ? $"{cliente.Nombre_Cli} {cliente.Apellido_Cli}" : "N/A")
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <label class="label-red-muted">BARBERO</label>
+                            <div class="text-white fs-5">
+                                @(barbero != null ? $"{barbero.Nombre_Bar} {barbero.Apellido_Bar}" : "N/A")
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-item mb-4">
+                        <label class="label-red-muted">MOTIVO SUGERIDO</label>
+                        <div class="text-white-50 small italic">Ausencia del cliente / Cancelación de último minuto</div>
+                    </div>
+                </div>
+
+                <form asp-action="Delete">
+                    <div class="row gx-2">
+                        <div class="col-6">
+                            <button type="submit" class="btn-delete-red w-100 py-3">
+                                <i class="bi bi-trash3-fill me-2"></i>CONFIRMAR BORRADO
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <a asp-action="Index" class="btn-cancel-outline w-100 py-3 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-x-circle me-2"></i>CANCELAR
+                            </a>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
 </div>
+
+<style>
+    .full-bg-centered {
+        background: radial-gradient(circle at center, rgba(20,0,0,0.8), rgba(0,0,0,0.95)), url('https://images.unsplash.com/photo-1512690196236-d5a232933339?auto=format&fit=crop&w=1350&q=80');
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        overflow-y: auto;
+    }
+
+    /* Borde degradado en tonos de rojo */
+    .gradient-border-delete {
+        background: linear-gradient(135deg, #ff0000 0%, #7a0000 100%);
+        padding: 2px;
+        border-radius: 15px;
+    }
+
+    .delete-card {
+        background: #0a0a0a;
+        border-radius: 13px;
+    }
+
+    .underline-red {
+        height: 3px;
+        width: 60px;
+        background: #ff0000;
+        margin-top: 5px;
+    }
+
+    .label-red-muted {
+        color: rgba(255, 0, 0, 0.6) !important;
+        font-weight: 700;
+        font-size: 0.75rem;
+        letter-spacing: 1.5px;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    /* Botón Rojo de Borrado */
+    .btn-delete-red {
+        background: #ff0000;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 900;
+        letter-spacing: 1px;
+        transition: 0.3s;
+        text-transform: uppercase;
+    }
+
+        .btn-delete-red:hover {
+            background: #cc0000;
+            transform: scale(1.02);
+        }
+
+    /* Botón de Cancelar */
+    .btn-cancel-outline {
+        background: transparent;
+        color: white !important;
+        border: 1px solid #333;
+        border-radius: 8px;
+        font-weight: bold;
+        text-decoration: none;
+        transition: 0.3s;
+        font-size: 0.85rem;
+    }
+
+        .btn-cancel-outline:hover {
+            background: #333;
+        }
+
+    .tracking-wider {
+        letter-spacing: 2px;
+    }
+</style>

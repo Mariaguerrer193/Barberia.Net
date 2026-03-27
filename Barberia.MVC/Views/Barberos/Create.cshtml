@@ -1,44 +1,143 @@
 ﻿@model Barberia.Modelos.Barbero
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Nuevo Barbero";
 }
 
-<h1>Create</h1>
+<div class="full-bg-barber d-flex align-items-center justify-content-center">
+    <div class="col-md-6 col-lg-4">
 
-<h4>Barbero</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <div class="form-group">
-                <label asp-for="Nombre_Bar" class="control-label"></label>
-                <input asp-for="Nombre_Bar" class="form-control" />
-                <span asp-validation-for="Nombre_Bar" class="text-danger"></span>
+        <div class="gradient-border-box">
+            <div class="create-card p-4 p-md-5">
+
+                <div class="text-center mb-4">
+                    <h2 class="text-white fw-bold tracking-wider mt-2">NUEVO BARBERO</h2>
+                    <div class="underline-white mx-auto"></div>
+                </div>
+
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Nombre_Bar" class="label-custom">NOMBRE</label>
+                        <input asp-for="Nombre_Bar" class="barber-input-field" placeholder="Ej: Mateo" />
+                        <span asp-validation-for="Nombre_Bar" class="text-danger small"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Apellido_Bar" class="label-custom">APELLIDO</label>
+                        <input asp-for="Apellido_Bar" class="barber-input-field" placeholder="Ej: Villalba" />
+                        <span asp-validation-for="Apellido_Bar" class="text-danger small"></span>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label asp-for="Telefono" class="label-custom">TELÉFONO</label>
+                        <input asp-for="Telefono" class="barber-input-field" placeholder="0987654321" />
+                        <span asp-validation-for="Telefono" class="text-danger small"></span>
+                    </div>
+
+                    <div class="d-grid gap-3">
+                        <button type="submit" class="btn-white-custom">
+                            REGISTRAR BARBERO
+                        </button>
+                        <a asp-action="Index" class="btn-back-link text-center">
+                            VOLVER AL LISTADO
+                        </a>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="Apellido_Bar" class="control-label"></label>
-                <input asp-for="Apellido_Bar" class="form-control" />
-                <span asp-validation-for="Apellido_Bar" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefono" class="control-label"></label>
-                <input asp-for="Telefono" class="form-control" />
-                <span asp-validation-for="Telefono" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<style>
+    .full-bg-barber {
+        background: radial-gradient(circle at center, rgba(0,0,0,0.8), rgba(0,0,0,0.95)), url('https://images.unsplash.com/photo-1512690196236-d5a232933339?auto=format&fit=crop&w=1350&q=80');
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        overflow-y: auto;
+    }
+
+    .gradient-border-box {
+        background: linear-gradient(135deg, #dc3545 0%, #0056b3 100%);
+        padding: 2px;
+        border-radius: 15px;
+    }
+
+    .create-card {
+        background: #0a0a0a;
+        border-radius: 13px;
+    }
+
+    /* LÍNEA BLANCA */
+    .underline-white {
+        height: 3px;
+        width: 60px;
+        background: #ffffff;
+        margin-top: 5px;
+        border-radius: 2px;
+    }
+
+    .label-custom {
+        color: #a6a6a6 !important; /* Gris Perla visible */
+        font-weight: 700;
+        font-size: 0.75rem;
+        letter-spacing: 1.5px;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .barber-input-field {
+        width: 100%;
+        background: #111 !important;
+        border: 1px solid #333 !important;
+        color: white !important;
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    /* BOTÓN BLANCO */
+    .btn-white-custom {
+        background: #ffffff;
+        color: #000000;
+        border: none;
+        padding: 14px;
+        border-radius: 8px;
+        font-weight: 900;
+        letter-spacing: 1px;
+        transition: 0.3s;
+        text-transform: uppercase;
+    }
+
+        .btn-white-custom:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+    .btn-back-link {
+        color: #ffffff;
+        text-decoration: underline;
+        font-size: 0.85rem;
+        opacity: 0.7;
+    }
+
+        .btn-back-link:hover {
+            opacity: 1;
+        }
+
+    .tracking-wider {
+        letter-spacing: 2px;
+    }
+</style>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

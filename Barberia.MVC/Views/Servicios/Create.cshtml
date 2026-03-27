@@ -1,44 +1,152 @@
 ﻿@model Barberia.Modelos.Servicio
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Nuevo Servicio";
 }
 
-<h1>Create</h1>
+<div class="full-bg-barber d-flex align-items-center justify-content-center">
+    <div class="col-md-8 col-lg-5">
 
-<h4>Servicio</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <div class="form-group">
-                <label asp-for="Nombre_Serv" class="control-label"></label>
-                <input asp-for="Nombre_Serv" class="form-control" />
-                <span asp-validation-for="Nombre_Serv" class="text-danger"></span>
+        <div class="gradient-border-box">
+            <div class="create-card p-4 p-md-5">
+
+                <div class="text-center mb-4">
+                    <h2 class="text-white fw-bold tracking-wider mt-2">NUEVO SERVICIO</h2>
+                    <div class="underline-white mx-auto"></div>
+                </div>
+
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                    <div class="form-group mb-4">
+                        <label asp-for="Nombre_Serv" class="label-custom">NOMBRE DEL SERVICIO</label>
+                        <input asp-for="Nombre_Serv" class="barber-input-field" placeholder="Ej: Corte Degradado + Barba" />
+                        <span asp-validation-for="Nombre_Serv" class="text-danger small"></span>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label asp-for="Duracion_Serv" class="label-custom">DURACIÓN (MIN)</label>
+                                <input asp-for="Duracion_Serv" class="barber-input-field" placeholder="30" />
+                                <span asp-validation-for="Duracion_Serv" class="text-danger small"></span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label asp-for="Precio_Serv" class="label-custom">PRECIO ($)</label>
+                                <input asp-for="Precio_Serv" class="barber-input-field" placeholder="10.00" />
+                                <span asp-validation-for="Precio_Serv" class="text-danger small"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-3">
+                        <button type="submit" class="btn-white-custom">
+                            REGISTRAR SERVICIO
+                        </button>
+                        <a asp-action="Index" class="btn-back-link text-center">
+                            VOLVER AL LISTADO
+                        </a>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="Duracion_Serv" class="control-label"></label>
-                <input asp-for="Duracion_Serv" class="form-control" />
-                <span asp-validation-for="Duracion_Serv" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Precio_Serv" class="control-label"></label>
-                <input asp-for="Precio_Serv" class="form-control" />
-                <span asp-validation-for="Precio_Serv" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<style>
+    .full-bg-barber {
+        background: radial-gradient(circle at center, rgba(0,0,0,0.8), rgba(0,0,0,0.95)), url('https://images.unsplash.com/photo-1512690196236-d5a232933339?auto=format&fit=crop&w=1350&q=80');
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        overflow-y: auto;
+    }
+
+    .gradient-border-box {
+        background: linear-gradient(135deg, #dc3545 0%, #0056b3 100%);
+        padding: 2px;
+        border-radius: 15px;
+    }
+
+    .create-card {
+        background: #0a0a0a;
+        border-radius: 13px;
+    }
+
+    .underline-white {
+        height: 3px;
+        width: 60px;
+        background: #ffffff;
+        margin-top: 5px;
+        border-radius: 2px;
+    }
+
+    .label-custom {
+        color: #a6a6a6 !important; /* Gris Perla medio */
+        font-weight: 700;
+        font-size: 0.75rem;
+        letter-spacing: 1.5px;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .barber-input-field {
+        width: 100%;
+        background: #111 !important;
+        border: 1px solid #333 !important;
+        color: white !important;
+        padding: 12px;
+        border-radius: 8px;
+        transition: 0.3s;
+    }
+
+        .barber-input-field:focus {
+            border-color: #ffffff !important;
+            outline: none;
+        }
+
+    .btn-white-custom {
+        background: #ffffff;
+        color: #000000;
+        border: none;
+        padding: 14px;
+        border-radius: 8px;
+        font-weight: 900;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: 0.3s;
+    }
+
+        .btn-white-custom:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+    .btn-back-link {
+        color: #ffffff;
+        text-decoration: underline;
+        font-size: 0.85rem;
+        opacity: 0.7;
+    }
+
+        .btn-back-link:hover {
+            opacity: 1;
+        }
+
+    .tracking-wider {
+        letter-spacing: 2px;
+    }
+</style>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

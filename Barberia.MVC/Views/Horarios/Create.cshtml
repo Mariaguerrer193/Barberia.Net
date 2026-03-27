@@ -1,46 +1,151 @@
 ﻿@model Barberia.Modelos.Horario
 
 @{
-    ViewData["Title"] = "Crear Horario";
+    ViewData["Title"] = "Nuevo Horario";
 }
 
-<h1>Crear</h1>
+<div class="full-bg-barber d-flex align-items-center justify-content-center">
+    <div class="col-md-8 col-lg-5">
 
-<h4>Nuevo Horario de Atención</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="gradient-border-box">
+            <div class="create-card p-4 p-md-5">
 
-            <div class="form-group mb-3">
-                <label asp-for="Fecha" class="control-label fw-bold"></label>
-                <input asp-for="Fecha" class="form-control" type="date" required />
-                <span asp-validation-for="Fecha" class="text-danger"></span>
+                <div class="text-center mb-4">
+                    <h2 class="text-white fw-bold tracking-wider mt-2">NUEVO HORARIO</h2>
+                    <div class="underline-white mx-auto"></div>
+                </div>
+
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                    <div class="form-group mb-4">
+                        <label asp-for="Fecha" class="label-custom">FECHA DE ATENCIÓN</label>
+                        <input asp-for="Fecha" class="barber-input-field" type="date" required />
+                        <span asp-validation-for="Fecha" class="text-danger small"></span>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label asp-for="HoraInicio" class="label-custom">HORA INICIO</label>
+                                <input asp-for="HoraInicio" class="barber-input-field" type="time" required />
+                                <span asp-validation-for="HoraInicio" class="text-danger small"></span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label asp-for="HoraFin" class="label-custom">HORA FIN</label>
+                                <input asp-for="HoraFin" class="barber-input-field" type="time" required />
+                                <span asp-validation-for="HoraFin" class="text-danger small"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-3">
+                        <button type="submit" class="btn-white-custom">
+                            GUARDAR HORARIO
+                        </button>
+                        <a asp-action="Index" class="btn-back-link text-center">
+                            VOLVER AL LISTADO
+                        </a>
+                    </div>
+                </form>
             </div>
-
-            <div class="form-group mb-3">
-                <label asp-for="HoraInicio" class="control-label fw-bold"></label>
-                <input asp-for="HoraInicio" class="form-control" type="time" required />
-                <span asp-validation-for="HoraInicio" class="text-danger"></span>
-            </div>
-
-            <div class="form-group mb-3">
-                <label asp-for="HoraFin" class="control-label fw-bold"></label>
-                <input asp-for="HoraFin" class="form-control" type="time" required />
-                <span asp-validation-for="HoraFin" class="text-danger"></span>
-            </div>
-
-            <div class="form-group mt-4">
-                <input type="submit" value="Guardar Horario" class="btn btn-primary w-100" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div class="mt-3">
-    <a asp-action="Index" class="btn btn-secondary btn-sm">Volver al listado</a>
-</div>
+<style>
+    .full-bg-barber {
+        background: radial-gradient(circle at center, rgba(0,0,0,0.8), rgba(0,0,0,0.95)), url('https://images.unsplash.com/photo-1512690196236-d5a232933339?auto=format&fit=crop&w=1350&q=80');
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        overflow-y: auto;
+    }
+
+    .gradient-border-box {
+        background: linear-gradient(135deg, #dc3545 0%, #0056b3 100%);
+        padding: 2px;
+        border-radius: 15px;
+    }
+
+    .create-card {
+        background: #0a0a0a;
+        border-radius: 13px;
+    }
+
+    .underline-white {
+        height: 3px;
+        width: 60px;
+        background: #ffffff;
+        margin-top: 5px;
+        border-radius: 2px;
+    }
+
+    .label-custom {
+        color: #a6a6a6 !important; /* Gris Perla medio */
+        font-weight: 700;
+        font-size: 0.75rem;
+        letter-spacing: 1.5px;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    /* Estilo para Inputs de Fecha y Hora */
+    .barber-input-field {
+        width: 100%;
+        background: #111 !important;
+        border: 1px solid #333 !important;
+        color: white !important;
+        padding: 12px;
+        border-radius: 8px;
+        transition: 0.3s;
+        color-scheme: dark; /* Esto hace que el calendario/reloj del navegador sea oscuro */
+    }
+
+        .barber-input-field:focus {
+            border-color: #ffffff !important;
+            outline: none;
+        }
+
+    .btn-white-custom {
+        background: #ffffff;
+        color: #000000;
+        border: none;
+        padding: 14px;
+        border-radius: 8px;
+        font-weight: 900;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: 0.3s;
+    }
+
+        .btn-white-custom:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+    .btn-back-link {
+        color: #ffffff;
+        text-decoration: underline;
+        font-size: 0.85rem;
+        opacity: 0.7;
+    }
+
+        .btn-back-link:hover {
+            opacity: 1;
+        }
+
+    .tracking-wider {
+        letter-spacing: 2px;
+    }
+</style>
 
 @section Scripts {
     @{

@@ -51,7 +51,7 @@
                             <td class="links-acciones text-end">
                                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                
                             </td>
                         </tr>
                     }
@@ -171,19 +171,12 @@
             margin: 0 3px;
         }
 
-            /* Color Azul para Edit */
             .links-acciones a[href*="Edit"] {
-                color: #00aaff;
-            }
-
-            /* Color Blanco para Details */
-            .links-acciones a[href*="Details"] {
                 color: #ffffff;
             }
 
-            /* Color Rojo para Delete */
-            .links-acciones a[href*="Delete"] {
-                color: #ff4444;
+            .links-acciones a[href*="Details"] {
+                color: #00aaff;
             }
 
             .links-acciones a:hover {

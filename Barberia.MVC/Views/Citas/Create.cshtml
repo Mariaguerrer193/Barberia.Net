@@ -1,56 +1,174 @@
 ﻿@model Barberia.Modelos.Cita
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Nueva Cita";
 }
 
-<h1>Create</h1>
+<div class="full-bg-barber d-flex align-items-center justify-content-center">
+    <div class="col-md-10 col-lg-7">
 
-<h4>Cita</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ClienteId" class="control-label"></label>
-                <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.Clientes">
-                    <option value="">-- Seleccione Cliente --</option>
-                </select>
-                <span asp-validation-for="ClienteId" class="text-danger"></span>
+        <div class="gradient-border-box">
+            <div class="create-card p-4 p-md-5">
+
+                <div class="text-center mb-4">
+                    <h2 class="text-white fw-bold tracking-wider mt-2">REGISTRAR NUEVA CITA</h2>
+                    <div class="underline-white mx-auto"></div>
+                </div>
+
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="ClienteId" class="label-custom">CLIENTE</label>
+                                <select asp-for="ClienteId" class="barber-input-field" asp-items="ViewBag.Clientes">
+                                    <option value="">-- Seleccione Cliente --</option>
+                                </select>
+                                <span asp-validation-for="ClienteId" class="text-danger small"></span>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label asp-for="BarberoId" class="label-custom">BARBERO</label>
+                                <select asp-for="BarberoId" class="barber-input-field" asp-items="ViewBag.Barberos">
+                                    <option value="">-- Seleccione Barbero --</option>
+                                </select>
+                                <span asp-validation-for="BarberoId" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="ServicioId" class="label-custom">SERVICIO</label>
+                                <select asp-for="ServicioId" class="barber-input-field" asp-items="ViewBag.Servicios">
+                                    <option value="">-- Seleccione Servicio --</option>
+                                </select>
+                                <span asp-validation-for="ServicioId" class="text-danger small"></span>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label asp-for="HorarioId" class="label-custom">HORARIO</label>
+                                <select asp-for="HorarioId" class="barber-input-field" asp-items="ViewBag.Horarios">
+                                    <option value="">-- Seleccione Horario --</option>
+                                </select>
+                                <span asp-validation-for="HorarioId" class="text-danger small"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-3 mt-4">
+                        <button type="submit" class="btn-white-custom">
+                            CONFIRMAR CITA
+                        </button>
+                        <a asp-action="Index" class="btn-back-link text-center">
+                            VOLVER AL LISTADO
+                        </a>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="BarberoId" class="control-label"></label>
-                <select asp-for="BarberoId" class="form-control" asp-items="ViewBag.Barberos">
-                    <option value="">-- Seleccione Barbero --</option>
-                </select>
-                <span asp-validation-for="BarberoId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ServicioId" class="control-label"></label>
-                <select asp-for="ServicioId" class="form-control" asp-items="ViewBag.Servicios">
-                    <option value="">-- Seleccione Servicio --</option>
-                </select>
-                <span asp-validation-for="ServicioId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HorarioId" class="control-label"></label>
-                <select asp-for="HorarioId" class="form-control" asp-items="ViewBag.Horarios">
-                    <option value="">-- Seleccione Horario --</option>
-                </select>
-                <span asp-validation-for="HorarioId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<style>
+    .full-bg-barber {
+        background: radial-gradient(circle at center, rgba(0,0,0,0.8), rgba(0,0,0,0.95)), url('https://images.unsplash.com/photo-1512690196236-d5a232933339?auto=format&fit=crop&w=1350&q=80');
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        overflow-y: auto;
+    }
+
+    .gradient-border-box {
+        background: linear-gradient(135deg, #dc3545 0%, #0056b3 100%);
+        padding: 2px;
+        border-radius: 15px;
+    }
+
+    .create-card {
+        background: #0a0a0a;
+        border-radius: 13px;
+    }
+
+    .underline-white {
+        height: 3px;
+        width: 60px;
+        background: #ffffff;
+        margin-top: 5px;
+        border-radius: 2px;
+    }
+
+    .label-custom {
+        color: #a6a6a6 !important; /* El gris perla que pediste */
+        font-weight: 700;
+        font-size: 0.75rem;
+        letter-spacing: 1.5px;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    /* Estilo para los Selects */
+    .barber-input-field {
+        width: 100%;
+        background: #111 !important;
+        border: 1px solid #333 !important;
+        color: white !important;
+        padding: 12px;
+        border-radius: 8px;
+        appearance: none;
+    }
+
+        .barber-input-field:focus {
+            border-color: #ffffff !important;
+            outline: none;
+        }
+
+        /* Estilo para las opciones del select */
+        .barber-input-field option {
+            background: #0a0a0a;
+            color: white;
+        }
+
+    .btn-white-custom {
+        background: #ffffff;
+        color: #000000;
+        border: none;
+        padding: 14px;
+        border-radius: 8px;
+        font-weight: 900;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: 0.3s;
+    }
+
+        .btn-white-custom:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+    .btn-back-link {
+        color: #ffffff;
+        text-decoration: underline;
+        font-size: 0.85rem;
+        opacity: 0.7;
+    }
+
+        .btn-back-link:hover {
+            opacity: 1;
+        }
+
+    .tracking-wider {
+        letter-spacing: 2px;
+    }
+</style>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

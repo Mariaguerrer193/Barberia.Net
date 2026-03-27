@@ -19,6 +19,12 @@
                     <div class="text-center pt-4">
                         <i class="bi bi-person-circle text-silver" style="font-size: 3rem;"></i>
                         <h2 class="text-white fw-bold mt-2 tracking-wider">SISTEMA DE BARBERÍA</h2>
+                        @if (ViewBag.ErrorMessage != null)
+                        {
+                            <div class="alert alert-danger text-center fw-bold py-2 mb-3" style="background: rgba(220, 53, 69, 0.2); border: 1px solid #dc3545; color: #ff6b6b; font-size: 0.8rem;">
+                                <i class="bi bi-x-circle-fill me-2"></i> @ViewBag.ErrorMessage
+                            </div>
+                        }
                         <p class="text-white-50 small">Ingrese sus credenciales</p>
                     </div>
 

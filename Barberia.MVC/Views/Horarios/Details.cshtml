@@ -4,42 +4,135 @@
     ViewData["Title"] = "Detalles del Horario";
 }
 
-<h1>Detalles</h1>
+<div class="full-bg-centered d-flex align-items-center justify-content-center">
+    <div class="col-md-7 col-lg-5">
 
-<div>
-    <h4>Información del Horario</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2 fw-bold">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
+        <div class="details-card shadow-lg">
+            <div class="details-header text-center pt-3">
+                <h2 class="text-white fw-bold tracking-wider mb-0">DETALLES DEL HORARIO</h2>
+                <div class="underline-blue mx-auto"></div>
+            </div>
 
-        <dt class="col-sm-2 fw-bold">
-            @Html.DisplayNameFor(model => model.Fecha)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Fecha)
-        </dd>
+            <div class="details-body px-4 py-3">
 
-        <dt class="col-sm-2 fw-bold">
-            @Html.DisplayNameFor(model => model.HoraInicio)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.HoraInicio)
-        </dd>
+                <div class="info-item mb-3">
+                    <label class="text-info-muted small fw-bold text-uppercase mb-0">ID de Registro</label>
+                    <div class="text-white fs-5">@Html.DisplayFor(model => model.Id)</div>
+                </div>
 
-        <dt class="col-sm-2 fw-bold">
-            @Html.DisplayNameFor(model => model.HoraFin)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.HoraFin)
-        </dd>
-    </dl>
+                <div class="info-item mb-4 border-bottom border-dark pb-2">
+                    <label class="text-info-muted small fw-bold text-uppercase mb-0">Fecha de Atención</label>
+                    <div class="text-white fs-5">
+                        <i class="bi bi-calendar3 text-info me-2 small"></i> @Html.DisplayFor(model => model.Fecha)
+                    </div>
+                </div>
+
+                <div class="row mb-5">
+                    <div class="col-6">
+                        <label class="text-info-muted small fw-bold text-uppercase mb-0">Hora Entrada</label>
+                        <div class="text-white fs-5">
+                            <i class="bi bi-clock-fill text-info me-1 small"></i> @Html.DisplayFor(model => model.HoraInicio)
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label class="text-info-muted small fw-bold text-uppercase mb-0">Hora Salida</label>
+                        <div class="text-white fs-5">
+                            <i class="bi bi-clock-history text-info me-1 small"></i> @Html.DisplayFor(model => model.HoraFin)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row gx-2">
+                    <div class="col-6">
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn-action-blue w-100 py-2">
+                            <i class="bi bi-pencil-square me-2"></i>MODIFICAR
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a asp-action="Index" class="btn-action-outline w-100 py-2">
+                            <i class="bi bi-arrow-left-circle me-2"></i>VOLVER
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="details-footer text-center pb-2">
+                <span class="badge bg-dark border border-info text-info x-small">DISPONIBILIDAD DE AGENDA</span>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a> |
-    <a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
-</div>
+
+<style>
+    .full-bg-centered {
+        background: radial-gradient(circle at center, rgba(0,0,0,0.7), rgba(0,0,0,0.95)), url('https://images.unsplash.com/photo-1512690196236-d5a232933339?auto=format&fit=crop&w=1350&q=80');
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        overflow-y: auto;
+        padding: 20px 0;
+    }
+
+    .details-card {
+        background: rgba(10, 10, 10, 0.95);
+        border: 1px solid #0dcaf0;
+        border-radius: 12px;
+    }
+
+    .underline-blue {
+        height: 2px;
+        width: 40px;
+        background: #0dcaf0;
+        margin-top: 5px;
+    }
+
+    .text-info-muted {
+        color: rgba(13, 202, 240, 0.7) !important;
+        font-size: 0.75rem;
+    }
+
+    .x-small {
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+    }
+
+    .btn-action-blue {
+        background: linear-gradient(90deg, #0dcaf0 0%, #0056b3 100%);
+        color: white !important;
+        border-radius: 6px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        font-size: 0.85rem;
+        transition: 0.3s;
+    }
+
+        .btn-action-blue:hover {
+            filter: brightness(1.2);
+            transform: scale(1.02);
+        }
+
+    .btn-action-outline {
+        background: transparent;
+        color: #0dcaf0 !important;
+        border: 1px solid #0dcaf0;
+        border-radius: 6px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        font-size: 0.85rem;
+        transition: 0.3s;
+    }
+
+        .btn-action-outline:hover {
+            background: rgba(13, 202, 240, 0.1);
+        }
+</style>

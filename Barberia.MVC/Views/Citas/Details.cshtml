@@ -1,48 +1,147 @@
 ﻿@model Barberia.Modelos.Cita
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles de la Cita";
+    var cliente = ViewBag.Cliente as Barberia.Modelos.Cliente;
+    var barbero = ViewBag.Barbero as Barberia.Modelos.Barbero;
+    var servicio = ViewBag.Servicio as Barberia.Modelos.Servicio;
+    var horario = ViewBag.Horario as Barberia.Modelos.Horario;
 }
 
-<h1>Details</h1>
+<div class="full-bg-centered d-flex align-items-center justify-content-center">
+    <div class="col-md-10 col-lg-7">
 
-<div>
-    <h4>Cita</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ClienteId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ClienteId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BarberoId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BarberoId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ServicioId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ServicioId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HorarioId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HorarioId)
-        </dd>
-    </dl>
+        <div class="details-card shadow-lg">
+            <div class="details-header text-center pt-3">
+                <h2 class="text-white fw-bold tracking-wider mb-0">DETALLES DE LA CITA</h2>
+                <div class="underline-blue mx-auto"></div>
+            </div>
+
+            <div class="details-body px-4 py-3">
+
+                <div class="info-item mb-3">
+                    <label class="text-info-muted small fw-bold text-uppercase mb-0">ID de Registro</label>
+                    <div class="text-white">@Model.Id</div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label class="text-info-muted small fw-bold text-uppercase mb-0">Cliente</label>
+                        <div class="text-white fs-5">
+                            @(cliente != null ? $"{cliente.Nombre_Cli} {cliente.Apellido_Cli}" : "Sin asignar")
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label class="text-info-muted small fw-bold text-uppercase mb-0">Barbero</label>
+                        <div class="text-white fs-5">
+                            @(barbero != null ? $"{barbero.Nombre_Bar} {barbero.Apellido_Bar}" : "Sin asignar")
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-6">
+                        <label class="text-info-muted small fw-bold text-uppercase mb-0">Servicio</label>
+                        <div class="text-white fs-5">
+                            @(servicio != null ? servicio.Nombre_Serv : "N/A")
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label class="text-info-muted small fw-bold text-uppercase mb-0">Fecha y Hora</label>
+                        <div class="text-white">
+                            @if (horario != null)
+                            {
+                                <div>@horario.Fecha.ToString("dd/MM/yyyy")</div>
+                                <div class="small text-white-50">@horario.HoraInicio</div>
+                            }
+                            else
+                            {
+                                <span>No asignado</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row gx-2 mt-4">
+                    <div class="col-6">
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn-action-blue w-100 py-2">
+                            <i class="bi bi-pencil-square me-2"></i>MODIFICAR
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a asp-action="Index" class="btn-action-outline w-100 py-2">
+                            <i class="bi bi-arrow-left-circle me-2"></i>VOLVER
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="details-footer text-center pb-2">
+                <span class="badge bg-dark border border-info text-info x-small">CITA REGISTRADA</span>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<style>
+    /* El CSS se mantiene igual para conservar el estilo azul que te gustó */
+    .full-bg-centered {
+        background: radial-gradient(circle at center, rgba(0,0,0,0.8), rgba(0,0,0,0.95)), url('https://images.unsplash.com/photo-1512690196236-d5a232933339?auto=format&fit=crop&w=1350&q=80');
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        overflow-y: auto;
+        padding: 20px 0;
+    }
+
+    .details-card {
+        background: rgba(10, 10, 10, 0.95);
+        border: 1px solid #0dcaf0;
+        border-radius: 12px;
+    }
+
+    .underline-blue {
+        height: 2px;
+        width: 40px;
+        background: #0dcaf0;
+        margin-top: 5px;
+    }
+
+    .text-info-muted {
+        color: rgba(13, 202, 240, 0.7) !important;
+        font-size: 0.75rem;
+    }
+
+    .x-small {
+        font-size: 0.65rem;
+    }
+
+    .btn-action-blue {
+        background: linear-gradient(90deg, #0dcaf0 0%, #0056b3 100%);
+        color: white !important;
+        border-radius: 6px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        font-size: 0.85rem;
+    }
+
+    .btn-action-outline {
+        background: transparent;
+        color: #0dcaf0 !important;
+        border: 1px solid #0dcaf0;
+        border-radius: 6px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        font-size: 0.85rem;
+    }
+</style>

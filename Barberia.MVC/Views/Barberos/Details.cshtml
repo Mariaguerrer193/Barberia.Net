@@ -1,42 +1,156 @@
 ﻿@model Barberia.Modelos.Barbero
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles del Barbero";
 }
 
-<h1>Details</h1>
+<div class="full-bg-barber d-flex align-items-center justify-content-center">
+    <div class="col-md-7 col-lg-5">
 
-<div>
-    <h4>Barbero</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre_Bar)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre_Bar)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Apellido_Bar)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Apellido_Bar)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefono)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Telefono)
-        </dd>
-    </dl>
+        <div class="details-card shadow-lg">
+            <div class="details-header text-center">
+                <div class="icon-box mx-auto mb-3">
+                    <i class="bi bi-person-badge-fill text-info"></i>
+                </div>
+                <h2 class="text-white fw-bold tracking-wider mb-0">EXPEDIENTE BARBERO</h2>
+                <div class="underline-blue mx-auto"></div>
+            </div>
+
+            <div class="details-body p-4">
+                <div class="info-item mb-4">
+                    <label class="text-info-muted small fw-bold text-uppercase">ID de Registro</label>
+                    <div class="text-white fs-5">@Html.DisplayFor(model => model.Id)</div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-6">
+                        <label class="text-info-muted small fw-bold text-uppercase">Nombre</label>
+                        <div class="text-white fs-5">
+                            @Html.DisplayFor(model => model.Nombre_Bar)
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label class="text-info-muted small fw-bold text-uppercase">Apellido</label>
+                        <div class="text-white fs-5">
+                            @Html.DisplayFor(model => model.Apellido_Bar)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-item mb-5">
+                    <label class="text-info-muted small fw-bold text-uppercase">Número de Contacto</label>
+                    <div class="text-white fs-5">
+                        <i class="bi bi-whatsapp text-info me-2"></i> @Html.DisplayFor(model => model.Telefono)
+                    </div>
+                </div>
+
+                <div class="row gx-2">
+                    <div class="col-6">
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn-action-blue w-100 h-100 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-pencil-square me-2"></i>MODIFICAR
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a asp-action="Index" class="btn-action-outline w-100 h-100 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-arrow-left-circle me-2"></i>VOLVER
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="details-footer text-center py-3">
+                <span class="badge bg-dark border border-info text-info small text-uppercase">PERSONAL ACTIVO</span>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<style>
+    .full-bg-barber {
+        background: radial-gradient(circle at center, rgba(0,0,0,0.7), rgba(0,0,0,0.95)), url('https://images.unsplash.com/photo-1512690196236-d5a232933339?auto=format&fit=crop&w=1350&q=80');
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    }
+
+    .details-card {
+        background: rgba(10, 10, 10, 0.95);
+        border: 1px solid #0dcaf0;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        overflow: hidden;
+    }
+
+    .details-header {
+        padding: 30px 20px 10px;
+    }
+
+    .icon-box {
+        width: 70px;
+        height: 70px;
+        background: rgba(13, 202, 240, 0.1);
+        border: 1px solid #0dcaf0;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+    }
+
+    .underline-blue {
+        height: 3px;
+        width: 60px;
+        background: #0dcaf0;
+        margin-top: 10px;
+        border-radius: 2px;
+    }
+
+    .text-info-muted {
+        color: rgba(13, 202, 240, 0.7) !important;
+    }
+
+    .tracking-wider {
+        letter-spacing: 2px;
+    }
+
+    .btn-action-blue {
+        background: linear-gradient(90deg, #0dcaf0 0%, #0056b3 100%);
+        color: white !important;
+        padding: 10px;
+        border-radius: 8px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        border: none;
+        font-size: 0.9rem;
+        transition: 0.3s;
+    }
+
+        .btn-action-blue:hover {
+            filter: brightness(1.2);
+            transform: scale(1.02);
+        }
+
+    .btn-action-outline {
+        background: transparent;
+        color: #0dcaf0 !important;
+        border: 1px solid #0dcaf0;
+        padding: 10px;
+        border-radius: 8px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: 0.3s;
+    }
+
+        .btn-action-outline:hover {
+            background: rgba(13, 202, 240, 0.1);
+            color: white !important;
+        }
+</style>

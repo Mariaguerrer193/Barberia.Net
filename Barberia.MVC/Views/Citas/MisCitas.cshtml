@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Barberia.Modelos.Cita>
+@{
+    var barberos = ViewBag.Barberos as List<Barberia.Modelos.Barbero>;
+    var servicios = ViewBag.Servicios as List<Barberia.Modelos.Servicio>;
+    var horarios = ViewBag.Horarios as List<Barberia.Modelos.Horario>;
+}
+
+<div class="full-bg-barber">
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-end mb-5">
+            <div>
+                <h1 class="text-white fw-bold mb-0 tracking-wider text-uppercase">Mi Historial</h1>
+                <div class="underline-white"></div>
+            </div>
+            <a asp-action="Agendar" class="btn-white-custom text-decoration-none">
+                <i class="bi bi-calendar-plus me-2"></i>NUEVA CITA
+            </a>
+        </div>
+
+        <div class="table-container shadow-lg">
+            <table class="table table-dark mb-0">
+                <thead>
+                    <tr class="header-white-row">
+                        <th class="text-white p-3">FECHA Y HORA</th>
+                        <th class="text-white p-3">BARBERO</th>
+                        <th class="text-white p-3">SERVICIO</th>
+                        <th class="text-white p-3 text-end">PRECIO</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        var barb = barberos?.FirstOrDefault(b => b.Id == item.BarberoId);
+                        var serv = servicios?.FirstOrDefault(s => s.Id == item.ServicioId);
+                        var hor = horarios?.FirstOrDefault(h => h.Id == item.HorarioId);
+
+                        <tr>
+                            <td class="p-3">
+                                @if (hor != null)
+                                {
+                                    <div class="text-white fw-bold">@hor.Fecha.ToShortDateString()</div>
+                                    <div class="text-white-50 small">@hor.HoraInicio</div>
+                                }
+                            </td>
+                            <td class="p-3 text-white">@(barb != null ? $"{barb.Nombre_Bar} {barb.Apellido_Bar}" : "No asignado")</td>
+                            <td class="p-3"><span class="text-silver">@(serv != null ? serv.Nombre_Serv : "N/A")</span></td>
+                            <td class="p-3 text-white fw-bold text-end">$@(serv != null ? serv.Precio_Serv.ToString() : "0")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<style>
+    .full-bg-barber {
+        background: radial-gradient(circle at center, rgba(0,0,0,0.8), rgba(0,0,0,0.95)), url('https://images.unsplash.com/photo-1512690196236-d5a232933339?auto=format&fit=crop&w=1350&q=80');
+        background-size: cover;
+        background-attachment: fixed;
+        min-height: 100vh;
+    }
+
+    .underline-white {
+        height: 4px;
+        width: 60px;
+        background: white;
+        margin-top: 8px;
+    }
+
+    .table-container {
+        border: 2px solid white;
+        border-radius: 12px;
+        overflow: hidden;
+        background: rgba(0,0,0,0.85);
+    }
+
+    .header-white-row {
+        border-bottom: 3px solid white;
+    }
+
+    .btn-white-custom {
+        background: white;
+        color: black;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: 900;
+        transition: 0.3s;
+    }
+
+        .btn-white-custom:hover {
+            transform: scale(1.05);
+            background: #f0f0f0;
+        }
+
+    .text-silver {
+        color: #c0c0c0;
+    }
+</style>

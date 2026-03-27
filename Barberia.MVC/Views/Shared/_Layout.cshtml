@@ -1,58 +1,123 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@{
+    // Aquí el Layout lee lo que guardamos en los controladores
+    var role = Context.Session.GetString("UserRole");
+    var nombre = Context.Session.GetString("UserName");
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Barberia.MVC</title>
+    <title>@ViewData["Title"] - Navaja de Plata</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Barberia.MVC.styles.css" asp-append-version="true" />
+    <style>
+        /* El azul marino que pediste */
+        .navbar-custom {
+            background-color: #001a33 !important;
+            padding: 10px 0;
+        }
+
+        .nav-link {
+            color: white !important;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+            .nav-link:hover {
+                color: #00aaff !important;
+            }
+
+        .navbar-brand {
+            color: white !important;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .text-info-user {
+            color: #00d4ff !important;
+            font-size: 0.8rem;
+            font-weight: 800;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark navbar-custom border-bottom border-dark box-shadow mb-0">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Barberia.MVC</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-brand mb-0 h1">
+                    <i class="bi bi-scissors me-2"></i>NAVAJA DE PLATA
+                </span>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Barberos" asp-action="Index">Barberos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Servicios" asp-action="Index">Servicios</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Horarios" asp-action="Index">Horarios</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Citas" asp-action="Index">Citas</a>
-                        </li>
+
+                        @* EL INICIO SOLO APARECE SI NO HAY NADIE LOGUEADO *@
+                        @if (string.IsNullOrEmpty(role))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Home" asp-action="Index">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Servicios" asp-action="Catalogo">Servicios Disponibles</a>
+                            </li>
+                        }
+
+                        @if (role == "Admin")
+                        {
+                            <li class="nav-item"><a class="nav-link" asp-controller="Barberos" asp-action="Index">Barberos</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Clientes" asp-action="Index">Clientes</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Servicios" asp-action="Index">Servicios</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Horarios" asp-action="Index">Horarios</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Citas" asp-action="Index">Citas</a></li>
+                        }
+                        else if (role == "Cliente")
+                        {
+                            <li class="nav-item"><a class="nav-link" asp-controller="Citas" asp-action="Agendar">Agendar Cita</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Citas" asp-action="MisCitas">Mi Historial</a></li>
+                        }
+                    </ul>
+
+                    @* Sección Derecha: Saludo y Salir *@
+                    <ul class="navbar-nav">
+                        @if (!string.IsNullOrEmpty(role))
+                        {
+                            <li class="nav-item d-flex align-items-center me-3">
+                                <span class="nav-link text-info-user">
+                                    <i class="bi bi-person-fill me-1"></i>
+                                    @(role == "Admin" ? "BIENVENIDO ADMIN" : $"HOLA {nombre?.ToUpper()}")
+                                </span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-danger btn-sm text-white fw-bold px-3" asp-controller="Account" asp-action="Logout">SALIR</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link fw-bold" asp-controller="Account" asp-action="Index">Ingresar</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+
+    <div class="container-fluid p-0">
+        <main role="main">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - Barberia.MVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -153,5 +153,35 @@ namespace Barberia.MVC.Controllers
                 return View(cita);
             }
         }
+
+
+        public IActionResult MisCitas()
+        {
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            var todas = Crud<Cita>.GetAll();
+            // Filtramos solo las citas que pertenecen al cliente logueado
+            var misCitas = todas.Where(c => c.ClienteId == userId).ToList();
+
+            // Enviamos los datos para buscar nombres
+            ViewBag.Barberos = Crud<Barbero>.GetAll();
+            ViewBag.Servicios = Crud<Servicio>.GetAll();
+            ViewBag.Horarios = Crud<Horario>.GetAll();
+
+            return View(misCitas);
+        }
+
+        public IActionResult Agendar()
+        {
+            // Usamos el método que ya tienes para cargar dropdowns
+            CargarListasEnViewBag();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Agendar(Cita cita)
+        {
+            Crud<Cita>.Create(cita);
+            return RedirectToAction("MisCitas");
+        }
     }
 }

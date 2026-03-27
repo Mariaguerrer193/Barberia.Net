@@ -10,22 +10,27 @@ Crud<Servicio>.EndPoint = "https://barberia-net.onrender.com/api/Servicios";
 Crud<Horario>.EndPoint = "https://barberia-net.onrender.com/api/Horarios";
 Crud<Cita>.EndPoint = "https://barberia-net.onrender.com/api/Citas";
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// 1. AGREGAR ESTO: Configuración de Sesiones
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // La sesión dura 30 minutos
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 builder.Services.AddScoped<IAuthService, AuthService>();
 
-
-builder.Services.AddAuthentication("Cookies") //cokies
+builder.Services.AddAuthentication("Cookies")
                 .AddCookie("Cookies", options =>
                 {
-                    options.LoginPath = "/Account/Index"; // Ruta de inicio de sesión
-
-
+                    options.LoginPath = "/Account/Index";
                 });
+
 builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
@@ -34,7 +39,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -42,6 +46,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+// 2. AGREGAR ESTO: Activar el uso de sesiones (IMPORTANTE: después de Routing)
+app.UseSession();
 
 app.UseAuthorization();
 

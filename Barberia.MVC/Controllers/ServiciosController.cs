@@ -98,5 +98,11 @@ namespace Barberia.MVC.Controllers
                 return View(servicio);
             }
         }
+
+        public IActionResult Catalogo()
+        {
+            var lista = Crud<Servicio>.GetAll();
+            return View(lista);
+        }
     }
 }

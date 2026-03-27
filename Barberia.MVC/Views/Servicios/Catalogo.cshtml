@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Barberia.Modelos.Servicio>
+
+<div class="container py-5 content-wrapper">
+    <div class="text-center mb-5 pt-4">
+        <h1 class="text-white fw-bold tracking-wider">CATÁLOGO DE SERVICIOS</h1>
+        <div class="underline-white mx-auto"></div>
+        <p class="text-white-50 mt-3 fs-5">Elige el estilo que mejor te defina</p>
+    </div>
+
+    <div class="row g-4 pb-5">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="gradient-border-box h-100">
+                    <div class="create-card p-4 d-flex flex-column h-100 text-center">
+                        <div class="mb-3">
+                            <i class="bi bi-scissors text-white fs-1"></i>
+                        </div>
+                        <h3 class="text-white fw-bold mb-3 text-uppercase">@item.Nombre_Serv</h3>
+
+                        <div class="d-flex justify-content-center gap-2 mb-4">
+                            <span class="badge bg-dark border border-secondary text-silver px-3 py-2">
+                                <i class="bi bi-clock me-1"></i> @item.Duracion_Serv min
+                            </span>
+                        </div>
+
+                        <div class="mt-auto pt-4">
+                            <div class="label-custom mb-1">INVERSIÓN</div>
+                            <div class="text-white fs-2 fw-bold">$@item.Precio_Serv</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    /* FONDO APLICADO AL BODY (Para asegurar el scroll) */
+    body {
+        background: radial-gradient(circle at center, rgba(0,0,0,0.8), rgba(0,0,0,0.95)), url('https://images.unsplash.com/photo-1512690196236-d5a232933339?auto=format&fit=crop&w=1350&q=80') !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-attachment: fixed !important;
+        margin: 0;
+        padding: 0;
+        height: auto !important;
+        overflow-y: auto !important;
+    }
+
+    .content-wrapper {
+        min-height: 100vh;
+        position: relative;
+        z-index: 1;
+    }
+
+    .gradient-border-box {
+        background: linear-gradient(135deg, #dc3545 0%, #0056b3 100%);
+        padding: 2px;
+        border-radius: 15px;
+        
+    }
+
+    .create-card {
+        background: #0a0a0a;
+        border-radius: 13px;
+    }
+
+    .underline-white {
+        height: 4px;
+        width: 80px;
+        background: white;
+        margin-top: 10px;
+        border-radius: 2px;
+    }
+
+    .label-custom {
+        color: #a6a6a6 !important;
+        font-weight: 700;
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+    }
+
+    .text-silver {
+        color: #c0c0c0;
+    }
+</style>

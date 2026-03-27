@@ -32,7 +32,23 @@ namespace Barberia.MVC.Controllers
 
             if (await _authService.Login(email, password))
             {
-                return RedirectToAction("Index", "Home");
+                // --- MODIFICACIÓN PARA EL LAYOUT ---
+                // Buscamos al cliente en la base de datos para obtener su Nombre e ID
+                var usuario = Crud<Cliente>.GetAll()
+                    .FirstOrDefault(u => u.Correo_Cli.ToLower() == email);
+
+                if (usuario != null)
+                {
+                    // Guardamos la "etiqueta" de que es un Cliente
+                    HttpContext.Session.SetString("UserRole", "Cliente");
+                    // Guardamos su nombre para el saludo en la barra
+                    HttpContext.Session.SetString("UserName", usuario.Nombre_Cli);
+                    // Guardamos su ID para que pueda agendar citas
+                    HttpContext.Session.SetInt32("UserId", usuario.Id);
+                }
+                // -----------------------------------
+
+                return RedirectToAction("MisCitas", "Citas");
             }
             else
             {
@@ -48,7 +64,7 @@ namespace Barberia.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(string Nombre_Cli,  string Apellido_Cli,  string Telefono_Cli, string Correo_cli, string contraseña_Cli)
+        public async Task<IActionResult> Register(string Nombre_Cli, string Apellido_Cli, string Telefono_Cli, string Correo_cli, string contraseña_Cli)
         {
             Correo_cli = Correo_cli.Trim().ToLower();
 
@@ -61,7 +77,7 @@ namespace Barberia.MVC.Controllers
                 return View();
             }
 
-            if (await _authService.Register(0,Nombre_Cli, Apellido_Cli, Telefono_Cli, Correo_cli, contraseña_Cli))
+            if (await _authService.Register(0, Nombre_Cli, Apellido_Cli, Telefono_Cli, Correo_cli, contraseña_Cli))
             {
                 return RedirectToAction("Index", "Account");
             }
@@ -75,9 +91,12 @@ namespace Barberia.MVC.Controllers
         {
             // Elimina la cookie de autenticación
             await HttpContext.SignOutAsync("Cookies");
-            return RedirectToAction("Index", "Account");
+
+            // --- MODIFICACIÓN PARA EL LAYOUT ---
+            // Limpiamos la sesión para que el menú vuelva a ser de visitante
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("Index", "Home");
         }
-
-
     }
 }

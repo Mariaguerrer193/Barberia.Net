@@ -85,6 +85,16 @@ namespace Barberia.MVC.Controllers
         {
             try
             {
+                var todasLasCitas = Crud<Cita>.GetAll();
+                bool ocupado = todasLasCitas.Any(c => c.BarberoId == cita.BarberoId && c.HorarioId == cita.HorarioId);
+
+                if (ocupado)
+                {
+                    ViewBag.ErrorDisponibilidad = "ERROR: EL BARBERO YA TIENE UNA CITA EN ESTE HORARIO.";
+                    CargarListasEnViewBag();
+                    return View(cita);
+                }
+
                 Crud<Cita>.Create(cita);
                 return RedirectToAction(nameof(Index));
             }
@@ -180,6 +190,18 @@ namespace Barberia.MVC.Controllers
         [HttpPost]
         public IActionResult Agendar(Cita cita)
         {
+            var todasLasCitas = Crud<Cita>.GetAll();
+            bool ocupado = todasLasCitas.Any(c => c.BarberoId == cita.BarberoId && c.HorarioId == cita.HorarioId);
+
+            if (ocupado)
+            {
+                ViewBag.ErrorDisponibilidad = "ESTE BARBERO YA TIENE UNA CITA EN EL HORARIO SELECCIONADO.";
+
+                CargarListasEnViewBag();
+                return View(cita);
+            }
+
+
             Crud<Cita>.Create(cita);
             return RedirectToAction("MisCitas");
         }

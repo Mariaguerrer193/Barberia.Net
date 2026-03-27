@@ -35,6 +35,14 @@
                         </select>
                     </div>
 
+                    @* --- BLOQUE DE ERROR POR SI EL BARBERO ESTÁ OCUPADO --- *@
+                    @if (ViewBag.ErrorDisponibilidad != null)
+                    {
+                        <div class="alert alert-danger text-center fw-bold mb-3 py-2" style="background: rgba(220, 53, 69, 0.2); border: 1px solid #dc3545; color: #ff6b6b; font-size: 0.8rem;">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i> @ViewBag.ErrorDisponibilidad
+                        </div>
+                    }
+
                     <div class="d-grid gap-3 mt-4">
                         <button type="submit" class="btn-white-custom">CONFIRMAR MI CITA</button>
                         <a asp-action="MisCitas" class="btn-back-link text-center">CANCELAR Y VOLVER</a>
@@ -46,6 +54,7 @@
 </div>
 
 <style>
+    /* Tus estilos se mantienen exactamente igual */
     .full-bg-barber {
         background: radial-gradient(circle at center, rgba(0,0,0,0.8), rgba(0,0,0,0.95)), url('https://images.unsplash.com/photo-1512690196236-d5a232933339?auto=format&fit=crop&w=1350&q=80');
         background-size: cover;

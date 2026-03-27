@@ -1,44 +1,147 @@
 ﻿@model Barberia.Modelos.Barbero
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Barbero";
 }
 
-<h1>Edit</h1>
+<div class="full-bg-barber d-flex align-items-center justify-content-center">
+    <div class="col-md-5 col-lg-4">
 
-<h4>Barbero</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <div class="form-group">
-                <label asp-for="Nombre_Bar" class="control-label"></label>
-                <input asp-for="Nombre_Bar" class="form-control" />
-                <span asp-validation-for="Nombre_Bar" class="text-danger"></span>
+        <div class="edit-card shadow-lg p-4 p-md-5">
+            <div class="text-center mb-4">
+                <i class="bi bi-pencil-square text-silver fs-1"></i>
+                <h2 class="text-white fw-bold tracking-wider mt-2">EDITAR BARBERO</h2>
+                <div class="underline-barber mx-auto"></div>
             </div>
-            <div class="form-group">
-                <label asp-for="Apellido_Bar" class="control-label"></label>
-                <input asp-for="Apellido_Bar" class="form-control" />
-                <span asp-validation-for="Apellido_Bar" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefono" class="control-label"></label>
-                <input asp-for="Telefono" class="form-control" />
-                <span asp-validation-for="Telefono" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                @Html.HiddenFor(model => model.Id)
+
+                <div class="form-group mb-4">
+                    <label class="form-label text-silver fw-bold small text-uppercase">Nombre</label>
+                    <input asp-for="Nombre_Bar" class="barber-input" placeholder="Escribe el nombre..." />
+                    <span asp-validation-for="Nombre_Bar" class="text-danger small"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label class="form-label text-silver fw-bold small text-uppercase">Apellido</label>
+                    <input asp-for="Apellido_Bar" class="barber-input" placeholder="Escribe el apellido..." />
+                    <span asp-validation-for="Apellido_Bar" class="text-danger small"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label class="form-label text-silver fw-bold small text-uppercase">Teléfono</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-black border-secondary text-silver"><i class="bi bi-telephone"></i></span>
+                        <input asp-for="Telefono" class="barber-input" placeholder="099xxxxxxx" />
+                    </div>
+                    <span asp-validation-for="Telefono" class="text-danger small"></span>
+                </div>
+
+                <div class="d-grid gap-3 mt-5">
+                    <button type="submit" class="btn-guardar">
+                        <i class="bi bi-check-lg me-2"></i>GUARDAR CAMBIOS
+                    </button>
+                    <a asp-action="Index" class="btn-volver">
+                        <i class="bi bi-arrow-left me-2"></i>REGRESAR A LA LISTA
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<style>
+    .full-bg-barber {
+        /* Fondo oscuro con degradado radial */
+        background: radial-gradient(circle at center, rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1512690196236-d5a232933339?auto=format&fit=crop&w=1350&q=80');
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        padding-top: 60px;
+        overflow-y: auto;
+    }
+
+    .edit-card {
+        background: rgba(15, 15, 15, 0.95);
+        border: 2px solid #c0c0c0;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+    }
+
+    /* LÍNEA DE TÍTULO: De Rojo a Azul Marino */
+    .underline-barber {
+        height: 4px;
+        width: 80px;
+        background: linear-gradient(90deg, #dc3545 0%, #001a33 100%);
+        border-radius: 2px;
+    }
+
+    .barber-input {
+        width: 100%;
+        background: #000 !important;
+        border: 1px solid #444 !important;
+        color: white !important;
+        padding: 12px;
+        border-radius: 6px;
+    }
+
+        .barber-input:focus {
+            border-color: #dc3545 !important; /* Brillo rojo al enfocar */
+            box-shadow: 0 0 8px rgba(220, 53, 69, 0.3);
+            outline: none;
+        }
+
+    /* BOTÓN: De Rojo a Azul Marino */
+    .btn-guardar {
+        background: linear-gradient(90deg, #dc3545 0%, #001a33 100%);
+        color: white;
+        padding: 12px;
+        border: 1px solid #c0c0c0;
+        border-radius: 6px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+
+        .btn-guardar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+        }
+
+    .btn-volver {
+        color: #c0c0c0;
+        text-decoration: none;
+        text-align: center;
+        font-size: 0.9rem;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+        .btn-volver:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+    .text-silver {
+        color: #c0c0c0;
+    }
+
+    .tracking-wider {
+        letter-spacing: 2px;
+    }
+</style>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

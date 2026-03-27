@@ -3,6 +3,7 @@ using Barberia.Modelos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,25 +14,26 @@ namespace Barberia.MVC.Controllers
         // --- MÉTODOS AUXILIARES PARA LLENAR DROPDOWNS ---
         private void CargarListasEnViewBag()
         {
-            ViewBag.ClientesList = Crud<Cliente>.GetAll().Select(c => new SelectListItem
+            // Se quitaron los sufijos "List" para que coincidan exactamente con lo que pide la Vista
+            ViewBag.Clientes = Crud<Cliente>.GetAll().Select(c => new SelectListItem
             {
                 Value = c.Id.ToString(),
                 Text = $"{c.Nombre_Cli} {c.Apellido_Cli}"
             }).ToList();
 
-            ViewBag.BarberosList = Crud<Barbero>.GetAll().Select(b => new SelectListItem
+            ViewBag.Barberos = Crud<Barbero>.GetAll().Select(b => new SelectListItem
             {
                 Value = b.Id.ToString(),
                 Text = $"{b.Nombre_Bar} {b.Apellido_Bar}"
             }).ToList();
 
-            ViewBag.ServiciosList = Crud<Servicio>.GetAll().Select(s => new SelectListItem
+            ViewBag.Servicios = Crud<Servicio>.GetAll().Select(s => new SelectListItem
             {
                 Value = s.Id.ToString(),
                 Text = $"{s.Nombre_Serv} (${s.Precio_Serv})"
             }).ToList();
 
-            ViewBag.HorariosList = Crud<Horario>.GetAll().Select(h => new SelectListItem
+            ViewBag.Horarios = Crud<Horario>.GetAll().Select(h => new SelectListItem
             {
                 Value = h.Id.ToString(),
                 Text = $"{h.Fecha:dd/MM/yyyy} - {h.HoraInicio}"

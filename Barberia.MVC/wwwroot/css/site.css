@@ -1,22 +1,121 @@
-html {
-  font-size: 14px;
+/* --- ADN VISUAL NAVAJA DE PLATA --- */
+
+/* Fondo global para las vistas de administración */
+.full-bg-barber {
+    background: radial-gradient(circle at center, rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1512690196236-d5a232933339?auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    z-index: 1000;
+    overflow-y: auto;
+    padding-bottom: 50px;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+/* Títulos y Líneas */
+.underline-barber {
+    height: 4px;
+    width: 80px;
+    background: linear-gradient(90deg, #dc3545 0%, #001a33 100%);
+    border-radius: 2px;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.tracking-wider {
+    letter-spacing: 2px;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+.text-bright-white {
+    color: #ffffff !important;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
 }
 
-body {
-  margin-bottom: 60px;
+.text-silver {
+    color: #c0c0c0 !important;
 }
+
+/* Contenedor de Tablas */
+.table-container {
+    border: 2px solid #c0c0c0;
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+}
+
+.header-gradient-row {
+    position: relative;
+}
+
+    .header-gradient-row th {
+        border-bottom: none !important;
+        padding-bottom: 15px !important;
+    }
+
+    .header-gradient-row::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, #0056b3 0%, #dc3545 100%);
+    }
+
+/* Botones y Links */
+.btn-nuevo, .btn-guardar {
+    background: linear-gradient(90deg, #dc3545 0%, #001a33 100%);
+    color: white !important;
+    padding: 10px 25px;
+    border: 1px solid #c0c0c0;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+    .btn-nuevo:hover, .btn-guardar:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(220, 53, 69, 0.4);
+    }
+
+.links-acciones a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: 0.2s;
+    margin: 0 3px;
+}
+
+    .links-acciones a[href*="Edit"] {
+        color: #00aaff;
+    }
+
+    .links-acciones a[href*="Details"] {
+        color: #ffffff;
+    }
+
+    .links-acciones a[href*="Delete"] {
+        color: #ff4444;
+    }
+
+/* Inputs de los formularios */
+.barber-input {
+    width: 100%;
+    background: #000 !important;
+    border: 1px solid #444 !important;
+    color: white !important;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+    .barber-input:focus {
+        border-color: #dc3545 !important;
+        box-shadow: 0 0 8px rgba(220, 53, 69, 0.3);
+        outline: none;
+    }
